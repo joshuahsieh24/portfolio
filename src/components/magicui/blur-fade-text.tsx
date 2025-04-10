@@ -17,6 +17,7 @@ interface BlurFadeTextProps {
   yOffset?: number;
   animateByCharacter?: boolean;
 }
+
 const BlurFadeText = ({
   text,
   className,
@@ -51,8 +52,8 @@ const BlurFadeText = ({
               }}
               className={cn("inline-block", className)}
               style={{ width: char.trim() === "" ? "0.2em" : "auto" }}
+              dangerouslySetInnerHTML={{ __html: char }}
             >
-              {char}
             </motion.span>
           ))}
         </AnimatePresence>
@@ -74,9 +75,8 @@ const BlurFadeText = ({
             ease: "easeOut",
           }}
           className={cn("inline-block", className)}
-        >
-          {text}
-        </motion.span>
+          dangerouslySetInnerHTML={{ __html: text }}
+        />
       </AnimatePresence>
     </div>
   );
