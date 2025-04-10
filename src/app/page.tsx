@@ -22,7 +22,7 @@ export default function Page() {
                 delay={BLUR_FADE_DELAY}
                 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
                 yOffset={8}
-                text={`Hi, I&apos;m ${DATA.name.split(" ")[0]} 👋`}
+                text={`Hi, I'm ${DATA.name.split(" ")[0]} 👋`}
               />
               <BlurFadeText
                 className="max-w-[600px] md:text-xl"
@@ -127,7 +127,7 @@ export default function Page() {
                   Check out my latest work
                 </h2>
                 <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  I&apos;ve worked on a variety of projects, from simple
+                  I've worked on a variety of projects, from simple
                   websites to complex web applications. Here are a few of my
                   favorites.
                 </p>
@@ -168,7 +168,7 @@ export default function Page() {
                   I like building things
                 </h2>
                 <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  While I haven&apos;t participated in any hackathons yet, I&apos;m excited to dive into the hackathon scene! I believe hackathons are a great way to challenge myself, learn from others, and build something meaningful in a short amount of time. I&apos;m registered for my first hackathon and can&apos;t wait to experience the collaborative and innovative environment.
+                  While I haven't participated in any hackathons yet, I'm excited to dive into the hackathon scene! I believe hackathons are a great way to challenge myself, learn from others, and build something meaningful in a short amount of time. I'm registered for my first hackathon and can't wait to experience the collaborative and innovative environment.
                 </p>
               </div>
             </div>
@@ -205,14 +205,14 @@ export default function Page() {
                 Get in Touch
               </h2>
               <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Let&apos;s connect :) Just shoot me a dm{" "}
+                Let's connect :) Just shoot me a dm{" "}
                 <Link
                   href={DATA.contact.social.Instagram.url}
                   className="text-blue-500 hover:underline"
                 >
                   with a direct question on Instagram
                 </Link>{" "}
-                and I&apos;ll respond whenever I can. Linkedin also works great!
+                and I'll respond whenever I can. Linkedin also works great!
               </p>
             </div>
           </BlurFade>

@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion, Variants } from "framer-motion";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 interface BlurFadeTextProps {
   text: string;
@@ -27,12 +27,33 @@ const BlurFadeText = ({
   yOffset = 8,
   animateByCharacter = false,
 }: BlurFadeTextProps) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const defaultVariants: Variants = {
     hidden: { y: yOffset, opacity: 0, filter: "blur(8px)" },
     visible: { y: -yOffset, opacity: 1, filter: "blur(0px)" },
   };
   const combinedVariants = variant || defaultVariants;
-  const characters = useMemo(() => Array.from(text), [text]);
+  
+  // Process text in a SSR-safe way
+  const processedText = useMemo(() => {
+    return text
+      .replace(/&apos;/g, "'")
+      .replace(/&quot;/g, '"')
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>');
+  }, [text]);
+
+  const characters = useMemo(() => Array.from(processedText), [processedText]);
+
+  if (!isMounted) {
+    return <div className={cn("inline-block", className)}>{processedText}</div>;
+  }
 
   if (animateByCharacter) {
     return (
@@ -46,14 +67,14 @@ const BlurFadeText = ({
               exit="hidden"
               variants={combinedVariants}
               transition={{
-                yoyo: Infinity,
                 delay: delay + i * characterDelay,
                 ease: "easeOut",
+                duration: 0.4,
               }}
               className={cn("inline-block", className)}
               style={{ width: char.trim() === "" ? "0.2em" : "auto" }}
-              dangerouslySetInnerHTML={{ __html: char }}
             >
+              {char}
             </motion.span>
           ))}
         </AnimatePresence>
@@ -70,13 +91,14 @@ const BlurFadeText = ({
           exit="hidden"
           variants={combinedVariants}
           transition={{
-            yoyo: Infinity,
             delay,
             ease: "easeOut",
+            duration: 0.4,
           }}
           className={cn("inline-block", className)}
-          dangerouslySetInnerHTML={{ __html: text }}
-        />
+        >
+          {processedText}
+        </motion.span>
       </AnimatePresence>
     </div>
   );

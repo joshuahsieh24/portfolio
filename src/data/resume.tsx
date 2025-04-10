@@ -168,6 +168,25 @@ export const DATA = {
   ],
   projects: [
     {
+      title: "SpartanYap",
+      href: "#",
+      target: "_blank",
+      rel: "noopener noreferrer",
+      dates: "January 2024 - Present",
+      active: true,
+      description:
+        "A Yelp-inspired web application for SJSU students to discover and review campus dining options. Features include user authentication, real-time reviews, and an interactive map of campus eateries.",
+      technologies: [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Prisma",
+        "PostgreSQL",
+      ],
+      links: [],
+      image: "/spartanyap.png",
+    },
+    {
       title: "ToGoBot",
       href: "https://www.youtube.com/watch?v=yt_Encgd2Z8&ab_channel=JonathanWu",
       target: "_blank",
