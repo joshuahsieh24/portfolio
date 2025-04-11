@@ -168,11 +168,31 @@ export const DATA = {
   ],
   projects: [
     {
+      title: "BuddyUp",
+      href: "#",
+      target: "_blank",
+      rel: "noopener noreferrer",
+      dates: "March 2025 - Present",
+      active: true,
+      description:
+        "In the works!",
+      technologies: [
+        "Next.js",
+        "React Vite",
+        "JavaScript",
+        "PostgreSQL",
+        "AWS RDS",
+      ],
+      links: [],
+      image: "/buddyup.png",
+      video: undefined,
+    },
+    {
       title: "SpartanYap",
       href: "#",
       target: "_blank",
       rel: "noopener noreferrer",
-      dates: "January 2024 - Present",
+      dates: "January 2024 - May 2024",
       active: true,
       description:
         "A Yelp-inspired web application for SJSU students to anonymously express their opinions about any campus related topics and more. Features include user authentication, real-time posts, and a search bar to find specific posts.",
