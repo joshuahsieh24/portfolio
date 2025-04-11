@@ -189,13 +189,13 @@ export const DATA = {
     },
     {
       title: "SpartanYap",
-      href: "#",
+      href: "https://spartanyap.onrender.com/feed",
       target: "_blank",
       rel: "noopener noreferrer",
       dates: "January 2024 - May 2024",
       active: true,
       description:
-        "A Yelp-inspired web application for SJSU students to anonymously express their opinions about any campus related topics and more. Features include user authentication, real-time posts, and a search bar to find specific posts.",
+        "A Yelp-inspired web application for SJSU students to anonymously express their opinions about any campus related topics and more.\n\nDatabase currently closed due to cost.",
       technologies: [
         "Next.js",
         "TypeScript",
@@ -209,7 +209,7 @@ export const DATA = {
     },
     {
       title: "ToGoBot",
-      href: "https://www.youtube.com/watch?v=yt_Encgd2Z8&ab_channel=JonathanWu",
+      href: "https://togobot.vercel.app/",
       target: "_blank",
       rel: "noopener noreferrer",
       dates: "February 2024 - May 2024",
