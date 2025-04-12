@@ -107,7 +107,7 @@ export const DATA = {
       start: "December 2024",
       end: "Present",
       description:
-        "...",
+        "Working on reverse rate my professor, a website that allows users to search for professors and view their reviews.",
     },
     {
       company: "Theta Tau",
