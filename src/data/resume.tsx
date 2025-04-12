@@ -99,15 +99,15 @@ export const DATA = {
         "...",
     },
     {
-      company: "SJSU College of Engineering Intern",
+      company: "SJSU College of Engineering",
       href: "",
       badges: [],
-      title: "Software Developer",
+      title: "Software Intern",
       logoUrl: "/SJSU.png",
       start: "December 2024",
       end: "Present",
       description:
-        "Working on reverse rate my professor, a website that allows users to search for professors and view their reviews.",
+        "Working on reverse rate my professor, a website that allows users to find professors based on their ratings and reviews.",
     },
     {
       company: "Theta Tau",
