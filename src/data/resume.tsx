@@ -224,6 +224,7 @@ export const DATA = {
       ],
       image: "/buddyup.png",
       video: undefined,
+      links: [],
     },
     {
       title: "SpartanYap",
