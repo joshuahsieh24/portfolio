@@ -182,7 +182,7 @@ export const DATA = {
         "PostgreSQL",
         "Mapbox",
       ],
-    
+      links: [],
       image: "/RERS.png",
       video: undefined,
     },
@@ -208,6 +208,7 @@ export const DATA = {
     },
     {
       title: "BuddyUp",
+      href: "#",
       target: "_blank",
       rel: "noopener noreferrer",
       dates: "April 2025",
