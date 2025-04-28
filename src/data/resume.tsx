@@ -168,8 +168,8 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "RERS",
-      href: "#",
+      title: "R.E.R.S",
+      href: "https://devpost.com/software/emergency-response-system-ers-lksjbq",
       target: "_blank",
       rel: "noopener noreferrer",
       dates: "April 2025",
@@ -182,13 +182,13 @@ export const DATA = {
         "PostgreSQL",
         "Mapbox",
       ],
-      links: [],
+    
       image: "/RERS.png",
       video: undefined,
     },
     {
       title: "Snug",
-      href: "#",
+      href: "https://snuggiebot.netlify.app/",
       target: "_blank",
       rel: "noopener noreferrer",
       dates: "March 2025 - Present",
@@ -208,7 +208,6 @@ export const DATA = {
     },
     {
       title: "BuddyUp",
-      href: "#",
       target: "_blank",
       rel: "noopener noreferrer",
       dates: "April 2025",
@@ -222,7 +221,6 @@ export const DATA = {
         "PostgreSQL",
         "AWS RDS",
       ],
-      links: [],
       image: "/buddyup.png",
       video: undefined,
     },
