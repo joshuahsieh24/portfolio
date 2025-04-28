@@ -10,7 +10,7 @@ export const DATA = {
   description:
     "Software Engineer at San Jose State University! I am super curious to learn. Some of my current goals are to keep up with the latest tech and participate in hackathons. Active on Linkedin.",
   summary:
-    "When I'm not programming at my computer, you can catch me lifting weights, hooping, playing badminton, cracking jokes with friends, eating great asian food, attempting to master a new hobby, or appreciating the small beautiful things in life. At the end of 2024, I experienced some monumental events that have driven me to pursue my career with passion, purpose, and ethics. I've learned to take in every moment fully and I want to connect with others and use tech to make people's lives better.\n\n[Check out my blog!](https://dev.to/josh_hsiehh)",
+    "When I'm not programming at my computer, you can catch me lifting weights, hooping, playing badminton, exploring new things, or appreciating life. At the end of 2024, I experienced some monumental events that have driven me to pursue my career with passion, purpose, and ethics. I've learned to take in every moment fully and I want to connect with others and use tech to make people's lives better.\n\n[Check out my blog!](https://dev.to/josh_hsiehh)",
   avatarUrl: "/heyy.jpeg",
   skills: [
     "React",
@@ -88,13 +88,13 @@ export const DATA = {
 
   work: [
     {
-      company: "Incoming Software Intern 🤔",
+      company: "Incoming Software Intern @ Delta Dental In.",
       href: "",
       badges: [],
       title: "...",
-      logoUrl: "/computer.jpg",
-      start: "",
-      end: "",
+      logoUrl: "/deltadental.png",
+      start: "June 2025",
+      end: "August 2025",
       description:
         "...",
     },
@@ -168,11 +168,50 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "BuddyUp",
+      title: "RERS",
+      href: "#",
+      target: "_blank",
+      rel: "noopener noreferrer",
+      dates: "April 2025",
+      active: true,
+      description:
+        "A platform designed to make dispatchers, first responders, and patients lives more efficient during emergency situations.",
+      technologies: [
+        "Next.js",
+        "FastAPI",
+        "PostgreSQL",
+        "Mapbox",
+      ],
+      links: [],
+      image: "/RERS.png",
+      video: undefined,
+    },
+    {
+      title: "Snug",
       href: "#",
       target: "_blank",
       rel: "noopener noreferrer",
       dates: "March 2025 - Present",
+      active: true,
+      description:
+        "Led team of 6 to build a mental health app called Snug, a simple web app that provides emotional support to users on college campuses through kiosks.",
+      technologies: [
+        "Next.js",
+        "React Vite",
+        "JavaScript",
+        "PostgreSQL",
+        "AWS RDS",
+      ],
+      links: [],
+      image: "/snuggie.png",
+      video: undefined,
+    },
+    {
+      title: "BuddyUp",
+      href: "#",
+      target: "_blank",
+      rel: "noopener noreferrer",
+      dates: "April 2025",
       active: true,
       description:
         "In the works!",
@@ -229,13 +268,22 @@ export const DATA = {
   ],
   hackathons: [
     {
+      title: "SpartUp Hackathon",
+      dates: "April 19th, 2025",
+      location: "San Jose, CA",
+      description:
+        "Led team of 6 to build a mental health app called Snug, a simple web app that provides emotional support to users on college campuses.",
+      image: "/spartup.png",
+      links: [],
+    },
+    {
       title: "SJ Hacks",
       dates: "April 26th - 27th, 2025",
       location: "San Jose, CA",
       description:
-        "Looking forward to participating in my first hackathon! Excited to collaborate with fellow students, learn new technologies, and build something innovative in 24 hours.",
-      image: "/sjhack.jpg",
-      links: [],
-    }
+        "Built a web app called RERS (Rapid Emergency Response System), a platform designed to make dispatchers, first responders, and patients lives more efficient during emergency situations.",
+        image: "/sjhack.jpg",
+        links:[],
+    },
   ],
 } as const;
