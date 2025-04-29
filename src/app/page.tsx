@@ -188,7 +188,7 @@ export default function Page() {
                   I like building things
                 </h2>
                 <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  While I haven't participated in any hackathons yet, I'm excited to dive into the hackathon scene! I believe hackathons are a great way to challenge myself, learn from others, and build something meaningful in a short amount of time. I look forward to participating in more hackathons in the future!
+                  I've participated in a few hackathons so far. I believe hackathons are a great way to challenge myself, learn from others, and build something meaningful in a short amount of time. I look forward to participating in more hackathons in the future!
                 </p>
               </div>
             </div>
