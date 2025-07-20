@@ -10,7 +10,7 @@ export const DATA = {
   description:
     "Software Engineer at San Jose State University! I am super curious to learn. Some of my current goals are to keep up with the latest tech and participate in hackathons. Active on Linkedin.",
   summary:
-    "When I'm not programming at my computer, you can catch me lifting weights, hooping, playing badminton, exploring new things, or appreciating life. At the end of 2024, I experienced some monumental events that have driven me to pursue my career with passion, purpose, and ethics. I've learned to take in every moment fully and I want to connect with others and use tech to make people's lives better.\n\n[Check out my blog!](https://dev.to/josh_hsiehh/welcome-to-my-blog-34cc)",
+    "When I'm not programming at my computer, you can catch me lifting weights, hooping, playing badminton, exploring new things, or appreciating life. I am highly interested in making a positive impact on the world and I am always looking for new opportunities to learn and grow.\n\n[Check out my blog!](https://dev.to/josh_hsiehh/welcome-to-my-blog-34cc)",
   avatarUrl: "/heyy.jpeg",
   skills: [
     "React",
@@ -40,7 +40,7 @@ export const DATA = {
     },
   ] as const,
   contact: {
-    email: "hsiehjoshua424@example.com",
+    email: "hsiehjoshua424@gmail.com",
     tel: "+1 669 251-7685",
     social: {
       GitHub: {
@@ -88,15 +88,15 @@ export const DATA = {
 
   work: [
     {
-      company: "Incoming Software Intern @ Delta Dental In.",
+      company: "Delta Dental In.",
       href: "",
       badges: [],
-      title: "...",
+      title: "Salesforce Developer Intern",
       logoUrl: "/deltadental.png",
       start: "June 2025",
       end: "August 2025",
       description:
-        "...",
+        "Built case hierarchy view, building AI email assistant, and more to come!",
     },
     {
       company: "SJSU College of Engineering",
