@@ -45,6 +45,7 @@ export function ProjectCard({
   return (
     <Card
       className="flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full"
+      style={{ margin: 0, padding: 0 }}
     >
       {/* ❌ Remove Link wrapping the media */}
       {video && (
@@ -58,13 +59,18 @@ export function ProjectCard({
         />
       )}
       {image && (
-        <Image
-          src={image}
-          alt={title}
-          width={500}
-          height={300}
-          className="h-40 w-full overflow-hidden object-cover object-top"
-        />
+        <div className="relative h-40 w-full overflow-hidden bg-gray-100" style={{ margin: 0, padding: 0 }}>
+          <img
+            src={image}
+            alt={title}
+            className="h-full w-full object-cover object-center"
+            style={{ 
+              objectPosition: 'center top',
+              margin: 0,
+              padding: 0
+            }}
+          />
+        </div>
       )}
 
       {/* ✅ Move Link to ONLY wrap title if href exists */}

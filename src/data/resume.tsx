@@ -105,7 +105,7 @@ export const DATA = {
       title: "Software Intern",
       logoUrl: "/SJSU.png",
       start: "December 2024",
-      end: "Present",
+      end: "May 2025",
       description:
         "Working on reverse rate my professor, a website that allows users to find professors based on their ratings and reviews.",
     },
@@ -138,7 +138,7 @@ export const DATA = {
       title: "Barista",
       logoUrl: "/meetfresh.jpg",
       start: "May 2024",
-      end: "Present",
+      end: "May 2025",
       description:
         "Prepared and served tea and snacks to customers. Cleaned and sanitized work areas. Maintained a clean and organized work environment. Followed health and safety guidelines. Provided excellent customer service.",
     },
@@ -162,11 +162,48 @@ export const DATA = {
       degree: "Software Engineering",
       logoUrl: "/SJSU.png",
       start: "2023",
-      end: "2026",
+      end: "2027",
     },
     
   ],
   projects: [
+    {
+      title: "Mindfit",
+      href: "https://joshhsieh.netlify.app",
+      target: "_blank",
+      rel: "noopener noreferrer",
+      dates: "May 2025",
+      active: true,
+      description:
+        "A complete redesign of my personal portfolio using Next.js, Tailwind CSS, and modern UI/UX practices. Features dynamic content, blog integration, and responsive design.",
+      technologies: [
+        "Next.js",
+        "Tailwind CSS",
+        "TypeScript",
+        "Vercel",
+      ],
+      links: [],
+      image: "",
+      video: undefined,
+    },
+    {
+      title: "Financeai",
+      href: "https://www.youtube.com/watch?v=VErtACNBZ7w",
+      target: "_blank",
+      rel: "noopener noreferrer",
+      dates: "April 2025",
+      active: true,
+      description:
+        "Developed a sophisticated financial analysis web application that leverages machine learning to detect fraudulent transactions in real-time. Built with production-level architecture and modern UI/UX design principles.",
+      technologies: [
+        "TypeScript",
+        "Python",
+        "Supabase",
+      ],
+      links: [],
+      image: "/finance.png",
+      video: undefined,
+    },
     {
       title: "R.E.R.S",
       href: "https://devpost.com/software/emergency-response-system-ers-lksjbq",
