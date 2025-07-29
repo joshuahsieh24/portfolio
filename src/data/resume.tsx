@@ -175,15 +175,16 @@ export const DATA = {
       dates: "May 2025",
       active: true,
       description:
-        "A complete redesign of my personal portfolio using Next.js, Tailwind CSS, and modern UI/UX practices. Features dynamic content, blog integration, and responsive design.",
+        "Built a cross-platform mobile wellness app with React Native and Supabase featuring one-tap logging, daily check-ins, and dark-mode UI. Designed intuitive FAB + bottom-sheet UX that reduced workout logging time by 75% through user preset caching. Integrated GPT-4o via FastAPI + Celery to auto-generate faith-based 'Boosts' in under 5 seconds, delivered daily at 6 AM with zero downtime on a free-tier stack.",
       technologies: [
-        "Next.js",
-        "Tailwind CSS",
-        "TypeScript",
-        "Vercel",
+        "React Native",
+        "Supabase",
+        "FastAPI",
+        "Celery",
+        "AWS S3",
       ],
       links: [],
-      image: "",
+      image: "/Mindfit.png",
       video: undefined,
     },
     {
