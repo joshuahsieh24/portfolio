@@ -65,35 +65,35 @@
       --ring: 0 0% 83.1%;
     }
 
-    /* Calm & Cozy Anime-Inspired theme overrides */
-    .calm-cozy {
-      --background: 30 41% 15%; /* midnight indigo */
-      --foreground: 210 40% 98%; /* cool light-gray */
+    /* Vibrant Forest Palette theme overrides */
+    .forest-theme {
+      --background: 150 60% 15%; /* canopy */
+      --foreground: 180 100% 99%; /* cloud */
       
-      --card: 30 41% 20%; /* surface */
-      --card-foreground: 210 40% 98%;
+      --card: 150 60% 20%; /* moss */
+      --card-foreground: 180 100% 99%;
       
-      --popover: 30 41% 20%;
-      --popover-foreground: 210 40% 98%;
+      --popover: 150 60% 20%;
+      --popover-foreground: 180 100% 99%;
       
-      --primary: 199 100% 75%; /* skyteal */
-      --primary-foreground: 30 41% 15%;
+      --primary: 120 100% 75%; /* leaf */
+      --primary-foreground: 150 60% 15%;
       
-      --secondary: 35 100% 70%; /* peachglow */
-      --secondary-foreground: 30 41% 15%;
+      --secondary: 45 100% 75%; /* sun */
+      --secondary-foreground: 150 60% 15%;
       
-      --muted: 30 41% 20%;
-      --muted-foreground: 210 40% 80%;
+      --muted: 150 60% 20%;
+      --muted-foreground: 180 100% 90%;
       
-      --accent: 199 100% 75%;
-      --accent-foreground: 30 41% 15%;
+      --accent: 195 100% 75%; /* aqua */
+      --accent-foreground: 150 60% 15%;
       
       --destructive: 0 62.8% 30.6%;
       --destructive-foreground: 0 0% 98%;
       
-      --border: 30 41% 25%;
-      --input: 30 41% 25%;
-      --ring: 199 100% 75%;
+      --border: 30 40% 20%; /* bark */
+      --input: 30 40% 20%;
+      --ring: 120 100% 75%;
     }
   }
 
@@ -102,7 +102,7 @@
       @apply border-border;
     }
     body {
-      @apply bg-midnight text-muted-foreground;
+      @apply bg-canopy text-cloud;
     }
   }
 

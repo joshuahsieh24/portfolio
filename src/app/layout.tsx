@@ -62,7 +62,7 @@ export default function RootLayout({
       </head>
       <body
         className={cn(
-          "min-h-screen bg-midnight text-muted-foreground font-sans antialiased max-w-2xl mx-auto py-12 sm:py-24 px-6",
+          "min-h-screen bg-canopy text-cloud font-sans antialiased max-w-2xl mx-auto py-12 sm:py-24 px-6 forest-theme",
           fontSans.variable
         )}
       >

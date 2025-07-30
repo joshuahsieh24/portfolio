@@ -58,11 +58,19 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Calm & Cozy Anime-Inspired theme colors
-        midnight: '#1E293B',
-        surface: '#293449',
-        skyteal: '#7DD3FC',
-        peachglow: '#F6BD60',
+        // Vibrant Forest Palette
+        canopy: '#114B36',
+        moss: '#2F8C4C',
+        leaf: '#7DFFB3',
+        sun: '#FFE28A',
+        aqua: '#84E8FF',
+        bark: '#4A331E',
+        cloud: '#FBFEFD',
+      },
+      backgroundImage: {
+        'forest-glow':
+          'radial-gradient(ellipse at 40% 10%, rgba(255,226,138,0.35) 0%, rgba(255,226,138,0) 60%), linear-gradient(to bottom, rgba(17,75,54,0.9), rgba(17,75,54,0.7))',
+        'radial-gradient': 'radial-gradient(var(--tw-gradient-stops))',
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -86,12 +94,28 @@ const config = {
           '0%,100%': { opacity: '0.6'}, 
           '50%': { opacity: '1'}
         },
+        sway: {
+          '0%,100%': { transform: 'translateY(-1.5%)'}, 
+          '50%': { transform: 'translateY(1.5%)'}
+        },
+        shimmer: {
+          '0%': { opacity: 0.6}, 
+          '50%': { opacity: 1}, 
+          '100%': { opacity: 0.6}
+        },
+        drift: {
+          '0%': { transform: 'translateX(-3%)'}, 
+          '100%': { transform: 'translateX(3%)'}
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         float: 'float 6s ease-in-out infinite',
         twinkle: 'twinkle 4s ease-in-out infinite',
+        sway: 'sway 7s ease-in-out infinite',
+        shimmer: 'shimmer 5s ease-in-out infinite',
+        drift: 'drift 12s ease-in-out alternate infinite',
       },
     },
   },

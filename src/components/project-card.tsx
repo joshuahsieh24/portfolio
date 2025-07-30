@@ -44,7 +44,7 @@ export function ProjectCard({
 }: Props) {
   return (
     <Card
-      className="flex flex-col overflow-hidden border border-skyteal/10 bg-surface/40 backdrop-blur-sm hover:shadow-[0_0_8px_theme('colors.skyteal')/20] hover:bg-surface/60 transition-all duration-300 ease-out h-full group"
+      className="flex flex-col overflow-hidden border border-leaf/10 bg-canopy/40 backdrop-blur-sm hover:shadow-[0_0_8px_theme('colors.leaf')/20] hover:bg-canopy/60 transition-all duration-300 ease-out h-full group"
       style={{ margin: 0, padding: 0 }}
     >
       {/* ❌ Remove Link wrapping the media */}
@@ -59,7 +59,7 @@ export function ProjectCard({
         />
       )}
       {image && (
-        <div className="relative h-40 w-full overflow-hidden bg-surface/40" style={{ margin: 0, padding: 0 }}>
+        <div className="relative h-40 w-full overflow-hidden bg-canopy/40" style={{ margin: 0, padding: 0 }}>
           <img
             src={image}
             alt={title}
@@ -83,16 +83,16 @@ export function ProjectCard({
               rel="noopener noreferrer"
               className={cn("block", className)}
             >
-              <CardTitle className="mt-1 text-base text-muted-foreground group-hover:text-skyteal transition-colors duration-200">{title}</CardTitle>
+              <CardTitle className="mt-1 text-base text-cloud group-hover:text-leaf transition-colors duration-200">{title}</CardTitle>
             </Link>
           ) : (
-            <CardTitle className="mt-1 text-base text-muted-foreground group-hover:text-skyteal transition-colors duration-200">{title}</CardTitle>
+            <CardTitle className="mt-1 text-base text-cloud group-hover:text-leaf transition-colors duration-200">{title}</CardTitle>
           )}
-          <time className="font-sans text-xs text-muted-foreground">{dates}</time>
+          <time className="font-sans text-xs text-cloud">{dates}</time>
           <div className="hidden font-sans text-xs underline print:visible">
             {link?.replace("https://", "").replace("www.", "").replace("/", "")}
           </div>
-          <Markdown className="prose max-w-full text-pretty font-sans text-xs text-muted-foreground dark:prose-invert prose-headings:text-skyteal prose-a:text-peachglow">
+          <Markdown className="prose max-w-full text-pretty font-sans text-xs text-cloud dark:prose-invert prose-headings:text-sun prose-a:text-aqua">
             {description}
           </Markdown>
         </div>
@@ -103,7 +103,7 @@ export function ProjectCard({
           <div className="mt-2 flex flex-wrap gap-1">
             {tags.map((tag) => (
               <Badge
-                className="px-1 py-0 text-[10px] bg-peachglow/20 text-peachglow border border-peachglow/30"
+                className="px-1 py-0 text-[10px] bg-sun/20 text-sun border border-sun/30"
                 variant="secondary"
                 key={tag}
               >
@@ -124,7 +124,7 @@ export function ProjectCard({
                 target={link.target || "_blank"}
                 rel={link.rel || "noopener noreferrer"}
               >
-                <Badge key={idx} className="flex gap-2 px-2 py-1 text-[10px] bg-skyteal/20 text-skyteal border border-skyteal/30 hover:bg-skyteal/30 transition-colors duration-200">
+                <Badge key={idx} className="flex gap-2 px-2 py-1 text-[10px] bg-leaf/20 text-leaf border border-leaf/30 hover:bg-leaf/30 transition-colors duration-200">
                   {link.icon}
                   {link.type}
                 </Badge>

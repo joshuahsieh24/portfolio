@@ -19,7 +19,7 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        cta: "bg-peachglow text-midnight shadow-sm hover:bg-peachglow/90 focus-visible:ring-skyteal/40 transition-all duration-200",
+        cta: "bg-leaf/90 hover:bg-leaf text-canopy font-semibold ring-2 ring-leaf/40 focus-visible:ring-sun transition active:scale-95",
       },
       size: {
         default: "h-9 px-4 py-2",
