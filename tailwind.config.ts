@@ -99,9 +99,9 @@ const config = {
           '50%': { transform: 'translateY(1.5%)'}
         },
         shimmer: {
-          '0%': { opacity: 0.6}, 
-          '50%': { opacity: 1}, 
-          '100%': { opacity: 0.6}
+          '0%': { opacity: '0.6'}, 
+          '50%': { opacity: '1'}, 
+          '100%': { opacity: '0.6'}
         },
         drift: {
           '0%': { transform: 'translateX(-3%)'}, 
