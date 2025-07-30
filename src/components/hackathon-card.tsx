@@ -26,23 +26,23 @@ export function HackathonCard({
   links,
 }: Props) {
   return (
-    <li className="relative ml-10 py-4">
-      <div className="absolute -left-16 top-2 flex items-center justify-center bg-white rounded-full">
-        <Avatar className="border size-12 m-auto">
+    <li className="relative ml-10 py-4 group">
+      <div className="absolute -left-16 top-2 flex items-center justify-center bg-surface/40 rounded-full border-2 border-skyteal/20 shadow-[0_0_8px_theme('colors.skyteal')/20] group-hover:shadow-[0_0_12px_theme('colors.skyteal')/30] transition-shadow duration-300">
+        <Avatar className="border-2 border-skyteal/20 size-12 m-auto bg-surface/60">
           <AvatarImage src={image} alt={title} className="object-contain" />
-          <AvatarFallback>{title[0]}</AvatarFallback>
+          <AvatarFallback className="bg-surface/60 text-skyteal">{title[0]}</AvatarFallback>
         </Avatar>
       </div>
       <div className="flex flex-1 flex-col justify-start gap-1">
         {dates && (
           <time className="text-xs text-muted-foreground">{dates}</time>
         )}
-        <h2 className="font-semibold leading-none">{title}</h2>
+        <h2 className="font-semibold leading-none text-muted-foreground group-hover:text-skyteal transition-colors duration-200">{title}</h2>
         {location && (
           <p className="text-sm text-muted-foreground">{location}</p>
         )}
         {description && (
-          <span className="prose dark:prose-invert text-sm text-muted-foreground">
+          <span className="prose dark:prose-invert text-sm text-muted-foreground prose-headings:text-skyteal prose-a:text-peachglow">
             {description}
           </span>
         )}
@@ -56,7 +56,7 @@ export function HackathonCard({
               target={link.target || "_blank"}
               rel={link.rel || "noopener noreferrer"}
             >
-              <Badge key={idx} title={link.title} className="flex gap-2">
+              <Badge key={idx} title={link.title} className="flex gap-2 bg-skyteal/20 text-skyteal border border-skyteal/30 hover:bg-skyteal/30 transition-colors duration-200">
                 {link.icon}
                 {link.title}
               </Badge>

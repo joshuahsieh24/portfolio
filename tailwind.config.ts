@@ -21,6 +21,8 @@ const config = {
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
+        headline: ['"Quicksand"', 'sans-serif'],
+        script: ['"Patrick Hand"', 'cursive'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -56,6 +58,11 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Calm & Cozy Anime-Inspired theme colors
+        midnight: '#1E293B',
+        surface: '#293449',
+        skyteal: '#7DD3FC',
+        peachglow: '#F6BD60',
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -71,10 +78,20 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        float: { 
+          '0%,100%': { transform: 'translateY(-2%)'}, 
+          '50%': { transform: 'translateY(2%)'}
+        },
+        twinkle:{ 
+          '0%,100%': { opacity: '0.6'}, 
+          '50%': { opacity: '1'}
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        float: 'float 6s ease-in-out infinite',
+        twinkle: 'twinkle 4s ease-in-out infinite',
       },
     },
   },

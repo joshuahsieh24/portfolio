@@ -14,11 +14,11 @@ export const ModeToggle = forwardRef<HTMLButtonElement>((props, ref) => {
       variant="ghost"
       type="button"
       size="icon"
-      className="px-2"
+      className="px-2 hover:bg-skyteal/20 hover:text-skyteal transition-colors duration-200"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
-      <SunIcon className="h-[1.2rem] w-[1.2rem] text-neutral-800 dark:hidden dark:text-neutral-200" />
-      <MoonIcon className="hidden h-[1.2rem] w-[1.2rem] text-neutral-800 dark:block dark:text-neutral-200" />
+      <SunIcon className="h-[1.2rem] w-[1.2rem] text-muted-foreground dark:hidden" />
+      <MoonIcon className="hidden h-[1.2rem] w-[1.2rem] text-muted-foreground dark:block" />
     </Button>
   );
 });

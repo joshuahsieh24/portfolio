@@ -64,6 +64,37 @@
       --input: 0 0% 14.9%;
       --ring: 0 0% 83.1%;
     }
+
+    /* Calm & Cozy Anime-Inspired theme overrides */
+    .calm-cozy {
+      --background: 30 41% 15%; /* midnight indigo */
+      --foreground: 210 40% 98%; /* cool light-gray */
+      
+      --card: 30 41% 20%; /* surface */
+      --card-foreground: 210 40% 98%;
+      
+      --popover: 30 41% 20%;
+      --popover-foreground: 210 40% 98%;
+      
+      --primary: 199 100% 75%; /* skyteal */
+      --primary-foreground: 30 41% 15%;
+      
+      --secondary: 35 100% 70%; /* peachglow */
+      --secondary-foreground: 30 41% 15%;
+      
+      --muted: 30 41% 20%;
+      --muted-foreground: 210 40% 80%;
+      
+      --accent: 199 100% 75%;
+      --accent-foreground: 30 41% 15%;
+      
+      --destructive: 0 62.8% 30.6%;
+      --destructive-foreground: 0 0% 98%;
+      
+      --border: 30 41% 25%;
+      --input: 30 41% 25%;
+      --ring: 199 100% 75%;
+    }
   }
 
   @layer base {
@@ -71,7 +102,7 @@
       @apply border-border;
     }
     body {
-      @apply bg-background text-foreground;
+      @apply bg-midnight text-muted-foreground;
     }
   }
 
