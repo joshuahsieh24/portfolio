@@ -201,9 +201,9 @@ export default function Page() {
             <BlurFade delay={BLUR_FADE_DELAY * 10.2}>
               <div className="group relative overflow-hidden rounded-2xl bg-card/50 border border-border/50 hover:shadow-lg transition-all duration-300 hover:scale-105">
                 <img 
-                  src="/pic3.jpg" 
+                  src="/pic7.png" 
                   alt="Life moment 3"
-                  className="w-full h-full object-cover aspect-square"
+                  className="w-full h-full object-cover object-left aspect-square"
                 />
               </div>
             </BlurFade>
