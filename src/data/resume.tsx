@@ -10,7 +10,7 @@ export const DATA = {
   description:
     "Software Engineer at San Jose State University! I am super curious to learn. Some of my current goals are to keep up with the latest tech and participate in hackathons. Active on Linkedin.",
   summary:
-    "When I'm not programming at my computer, you can catch me lifting weights, hooping, playing badminton, exploring new things, or appreciating life. I am highly interested in making a positive impact on the world and I am always looking for new opportunities to learn and grow.\n\n[Check out my blog!](https://dev.to/josh_hsiehh/welcome-to-my-blog-34cc)",
+    "When I'm not programming at my computer, you can catch me playing sports, cooking, watching a show, or trying new things. I am highly interested in making a positive impact on the world and I am always looking for new opportunities to learn and grow.\n\n[Check out my blog!](https://dev.to/josh_hsiehh/welcome-to-my-blog-34cc)",
   avatarUrl: "/heyy.jpeg",
   skills: [
     "React",
