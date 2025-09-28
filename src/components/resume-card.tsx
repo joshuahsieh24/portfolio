@@ -50,28 +50,28 @@ export const ResumeCard = ({
       target={target || "_blank"}
       rel={rel || "noopener noreferrer"}
     >
-      <Card className="flex bg-transparent border border-leaf/10 hover:shadow-[0_0_8px_theme('colors.leaf')/20] hover:bg-leaf/5 transition-all duration-300 group">
+      <Card className="flex bg-transparent border border-white/10 hover:shadow-lg hover:bg-white/5 transition-all duration-300 group">
         <div className="flex-none">
-          <Avatar className="border-2 border-leaf/20 size-12 m-auto bg-transparent">
+          <Avatar className="border-2 border-white/20 size-12 m-auto bg-secondary">
             <AvatarImage
               src={logoUrl}
               alt={altText}
               className="object-contain"
             />
-            <AvatarFallback className="bg-transparent text-leaf">{altText[0]}</AvatarFallback>
+            <AvatarFallback className="bg-secondary text-white">{altText[0]}</AvatarFallback>
           </Avatar>
         </div>
         <div className="flex-grow ml-4 items-center flex-col group">
           <CardHeader>
             <div className="flex items-center justify-between gap-x-2 text-base">
-              <h3 className="inline-flex items-center justify-center font-semibold leading-none text-xs sm:text-sm text-cloud group-hover:text-leaf transition-colors duration-200">
+              <h3 className="inline-flex items-center justify-center font-semibold leading-none text-xs sm:text-sm text-white group-hover:text-gray-200 transition-colors duration-200">
                 {title}
                 {badges && (
                   <span className="inline-flex gap-x-1">
                     {badges.map((badge, index) => (
                       <Badge
                         variant="secondary"
-                        className="align-middle text-xs bg-sun/20 text-sun border border-sun/30"
+                        className="align-middle text-xs bg-white/10 text-white border border-white/30"
                         key={index}
                       >
                         {badge}
@@ -81,16 +81,16 @@ export const ResumeCard = ({
                 )}
                 <ChevronRightIcon
                   className={cn(
-                    "size-4 translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100 text-leaf",
+                    "size-4 translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100 text-white",
                     isExpanded ? "rotate-90" : "rotate-0"
                   )}
                 />
               </h3>
-              <div className="text-xs sm:text-sm tabular-nums text-cloud text-right">
+              <div className="text-xs sm:text-sm tabular-nums text-gray-300 text-right">
                 {period}
               </div>
             </div>
-            {subtitle && <div className="font-sans text-xs text-cloud">{subtitle}</div>}
+            {subtitle && <div className="font-sans text-xs text-gray-300">{subtitle}</div>}
           </CardHeader>
           {description && (
             <motion.div
@@ -103,7 +103,7 @@ export const ResumeCard = ({
                 duration: 0.7,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="mt-2 text-xs sm:text-sm text-cloud"
+              className="mt-2 text-xs sm:text-sm text-gray-300"
             >
               {description}
             </motion.div>

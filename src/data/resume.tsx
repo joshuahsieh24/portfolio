@@ -94,7 +94,7 @@ export const DATA = {
       title: "Salesforce Developer Intern",
       logoUrl: "/deltadental.png",
       start: "June 2025",
-      end: "August 2025",
+      end: "Present",
       description:
         "Built case hierarchy view, building AI email assistant, and more to come!",
     },

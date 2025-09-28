@@ -1,5 +1,5 @@
-import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -33,7 +33,12 @@ export default function Navbar() {
             >
               Let's Connect
             </Link>
-            <ModeToggle />
+            <Avatar className="w-8 h-8 ring-2 ring-white/20">
+              <AvatarImage src={DATA.avatarUrl} alt={DATA.name} className="object-cover" />
+              <AvatarFallback className="text-xs bg-secondary text-white">
+                {DATA.initials}
+              </AvatarFallback>
+            </Avatar>
           </div>
         </div>
       </div>
