@@ -8,32 +8,41 @@ export const DATA = {
   location: "San Francisco, CA",
   locationLink: "https://www.google.com/maps/place/sanfrancisco",
   description:
-    "Software Engineer at San Jose State University! I am super curious to learn. Some of my current goals are to keep up with the latest tech and participate in hackathons. Active on Linkedin.",
+    "Software Engineering student at SJSU building full-stack web and mobile apps. Interning at Delta Dental, competing in hackathons, and always shipping something new.",
   summary:
-    "When I'm not programming at my computer, you can catch me playing sports, cooking, watching a show, or trying new things. I am highly interested in making a positive impact on the world and I am always looking for new opportunities to learn and grow.\n\n[Check out my blog!](https://dev.to/josh_hsiehh/welcome-to-my-blog-34cc)",
+    "When I'm not coding, you can find me playing sports, cooking, watching shows, or exploring new places. I care deeply about building things that make a real difference — whether that's a mental health app for college students or an emergency dispatch system that helps save lives.\n\n[Check out my blog!](https://dev.to/josh_hsiehh/welcome-to-my-blog-34cc)",
   avatarUrl: "/heyy.jpeg",
   skills: [
     "React",
     "Next.js",
-    "Typescript",
+    "TypeScript",
     "Node.js",
     "Python",
-    "Postgres",
+    "FastAPI",
+    "React Native",
+    "PostgreSQL",
+    "Supabase",
+    "Prisma",
     "Docker",
+    "AWS",
+    "Firebase",
     "Java",
     "C++",
+    "Git",
+    "REST APIs",
+    "Tailwind CSS",
   ],
   navbar: [
-    { 
-      href: "/", 
-      icon: HomeIcon, 
+    {
+      href: "/",
+      icon: HomeIcon,
       label: "Home",
       target: undefined,
       rel: undefined
     },
-    { 
-      href: "/JoshuaHsiehResume.pdf", 
-      icon: FileIcon, 
+    {
+      href: "/JoshuaHsiehResume.pdf",
+      icon: FileIcon,
       label: "Resume",
       target: "_blank",
       rel: "noopener noreferrer"
@@ -77,7 +86,7 @@ export const DATA = {
       },
       email: {
         name: "Send Email",
-        url: "#",
+        url: "mailto:hsiehjoshua424@gmail.com",
         icon: Icons.email,
         target: "_blank",
         rel: "noopener noreferrer",
@@ -88,37 +97,37 @@ export const DATA = {
 
   work: [
     {
-      company: "Delta Dental In.",
-      href: "",
+      company: "Delta Dental Inc.",
+      href: "https://www.deltadental.com/",
       badges: [],
       title: "Salesforce Developer Intern",
       logoUrl: "/deltadental.png",
       start: "June 2025",
       end: "Present",
       description:
-        "Built case hierarchy view, building AI email assistant, and more to come!",
+        "Built a Salesforce case hierarchy view component to streamline complex case management for support teams. Currently developing an AI-powered email assistant using Apex and Lightning Web Components (LWC) to accelerate response workflows for dental insurance operations.",
     },
     {
       company: "SJSU College of Engineering",
-      href: "",
+      href: "https://www.sjsu.edu/engineering/",
       badges: [],
       title: "Software Intern",
       logoUrl: "/SJSU.png",
       start: "December 2024",
       end: "May 2025",
       description:
-        "Working on reverse rate my professor, a website that allows users to find professors based on their ratings and reviews.",
+        "Developed 'Reverse Rate My Professor,' a full-stack web app enabling SJSU students to discover professors based on community ratings and course reviews. Built with Next.js, TypeScript, PostgreSQL, and Prisma ORM — serving as a data-driven tool for smarter course selection.",
     },
     {
       company: "Theta Tau",
-      href: "",
+      href: "https://thetatau.org/",
       badges: [],
       title: "Rush Chair",
       logoUrl: "/thetatau.png",
       start: "December 2024",
       end: "February 2025",
       description:
-        "Responsible for planning and executing the rush process for the fraternity. This includes coordinating events, managing applications, and facilitating the transition of new members into the organization!",
+        "Spearheaded recruitment for SJSU's Theta Tau engineering fraternity, coordinating events and managing 20+ applicants through the selection pipeline. Designed the onboarding experience for new members and led cross-functional communication between chapter leadership and incoming pledges.",
     },
     {
       company: "Silicon Valley Church",
@@ -129,7 +138,7 @@ export const DATA = {
       start: "August 2023",
       end: "Present",
       description:
-        "Being a member of the church has become a big part of my life and I enjoy the opportunities I have to serve the community.",
+        "Serve weekly as a core volunteer, supporting events, community outreach, and operations for a congregation of 300+ members. Helped coordinate logistics for large-scale community initiatives and built lasting relationships through consistent service.",
     },
     {
       company: "MeetFresh USA",
@@ -140,7 +149,7 @@ export const DATA = {
       start: "May 2024",
       end: "May 2025",
       description:
-        "Prepared and served tea and snacks to customers. Cleaned and sanitized work areas. Maintained a clean and organized work environment. Followed health and safety guidelines. Provided excellent customer service.",
+        "Delivered high-volume customer service in a fast-paced environment while maintaining quality and consistency. Trained new team members, managed inventory, and upheld health and safety standards.",
     },
     {
       company: "Legarza Sports",
@@ -151,20 +160,20 @@ export const DATA = {
       start: "June 2023",
       end: "August 2024",
       description:
-        "Led basketball and S.T.E.A.M activities for youth, demonstrating techniques and fostering skill development. Built strong relationships with parents through regular communication and progress updates. Created a positive and inclusive environment that encouraged teamwork and personal growth. Managed group dynamics and ensured safety protocols were followed during all activities.",
+        "Coached youth basketball and S.T.E.A.M. programs for groups of 15–20 students, designing curriculum that blended athletic skill-building with science and technology concepts. Fostered an inclusive team environment and communicated progress updates to parents regularly.",
     },
-    
+
   ],
   education: [
     {
       school: "San Jose State University",
       href: "https://www.sjsu.edu/engineering/",
-      degree: "Software Engineering",
+      degree: "B.S. Software Engineering",
       logoUrl: "/SJSU.png",
       start: "2023",
       end: "2027",
     },
-    
+
   ],
   projects: [
     {
@@ -175,7 +184,7 @@ export const DATA = {
       dates: "May 2025",
       active: true,
       description:
-        "Built a cross-platform mobile wellness app with React Native and Supabase featuring one-tap logging, daily check-ins, and dark-mode UI. Designed intuitive FAB + bottom-sheet UX that reduced workout logging time by 75% through user preset caching. Integrated GPT-4o via FastAPI + Celery to auto-generate faith-based 'Boosts' in under 5 seconds, delivered daily at 6 AM with zero downtime on a free-tier stack.",
+        "Cross-platform mobile wellness app built with React Native and Supabase. Features one-tap workout logging, daily check-ins, and a dark-mode UI that reduced logging time by 75% through user preset caching. Integrated GPT-4o via FastAPI and Celery to auto-generate personalized motivational boosts delivered daily at 6 AM — running with zero downtime on a free-tier stack.",
       technologies: [
         "React Native",
         "Supabase",
@@ -188,14 +197,14 @@ export const DATA = {
       video: undefined,
     },
     {
-      title: "Financeai",
+      title: "FinanceAI",
       href: "https://www.youtube.com/watch?v=VErtACNBZ7w",
       target: "_blank",
       rel: "noopener noreferrer",
       dates: "April 2025",
       active: true,
       description:
-        "Developed a sophisticated financial analysis web application that leverages machine learning to detect fraudulent transactions in real-time. Built with production-level architecture and modern UI/UX design principles.",
+        "Financial analysis web app with a machine learning pipeline for real-time fraud detection on transaction data. Features interactive risk dashboards, anomaly scoring, and alert systems — built with a Python/TypeScript stack and production-level architecture.",
       technologies: [
         "TypeScript",
         "Python",
@@ -213,7 +222,7 @@ export const DATA = {
       dates: "April 2025",
       active: true,
       description:
-        "A platform designed to make dispatchers, first responders, and patients lives more efficient during emergency situations.",
+        "Full-stack emergency response coordination platform built at SJ Hacks. Enables real-time GPS-based dispatch for first responders, role-based dashboards for dispatchers and paramedics, and live incident tracking via Mapbox — designed to reduce response times in critical situations.",
       technologies: [
         "Next.js",
         "FastAPI",
@@ -232,7 +241,7 @@ export const DATA = {
       dates: "March 2025 - Present",
       active: true,
       description:
-        "Led team of 6 to build a mental health app called Snug, a simple web app that provides emotional support to users on college campuses through kiosks.",
+        "Led a team of 6 to build a kiosk-based mental health app for college campuses. Features an AI-powered emotional support chatbot, anonymous session handling, and real-time conversation state. Presented at SpartUp Hackathon as a solution to the campus mental health crisis.",
       technologies: [
         "Next.js",
         "React Vite",
@@ -252,7 +261,7 @@ export const DATA = {
       dates: "April 2025",
       active: true,
       description:
-        "In the works!",
+        "Social platform connecting college students based on shared interests, study goals, and campus activities. Features interest-based matching, group creation, and real-time messaging — built to help students form meaningful connections beyond the classroom.",
       technologies: [
         "Next.js",
         "React Vite",
@@ -272,7 +281,7 @@ export const DATA = {
       dates: "January 2024 - May 2024",
       active: true,
       description:
-        "A Yelp-inspired web application for SJSU students to anonymously express their opinions about any campus related topics and more.\n\nDatabase currently closed due to cost.",
+        "Yelp-inspired anonymous feedback platform for SJSU students to rate and discuss campus topics, courses, and campus life. Built with a full Next.js + Prisma + PostgreSQL stack.\n\nDatabase currently paused due to hosting costs.",
       technologies: [
         "Next.js",
         "TypeScript",
@@ -292,7 +301,7 @@ export const DATA = {
       dates: "February 2024 - May 2024",
       active: true,
       description:
-        "Built website for an autonomous food delivery robot that uses a combination of computer vision and reinforcement learning to navigate a warehouse environment.",
+        "Marketing and demo website for an autonomous food delivery robot that uses computer vision and reinforcement learning to navigate warehouse environments. Features a live video walkthrough of the robot in action.",
       technologies: [
         "ReactJS",
         "HTML",
@@ -310,7 +319,7 @@ export const DATA = {
       dates: "April 19th, 2025",
       location: "San Jose, CA",
       description:
-        "Led team of 6 to build a mental health app called Snug, a simple web app that provides emotional support to users on college campuses.",
+        "Led a team of 6 to build Snug — a kiosk-based mental health support app for college campuses. Designed the full product from concept to demo in under 24 hours.",
       image: "/spartup.png",
       links: [],
     },
@@ -319,9 +328,9 @@ export const DATA = {
       dates: "April 26th - 27th, 2025",
       location: "San Jose, CA",
       description:
-        "Built a web app called RERS (Rapid Emergency Response System), a platform designed to make dispatchers, first responders, and patients lives more efficient during emergency situations.",
-        image: "/sjhack.jpg",
-        links:[],
+        "Built R.E.R.S (Rapid Emergency Response System) — a real-time dispatch platform for first responders featuring GPS tracking, role-based dashboards, and live incident management.",
+      image: "/sjhack.jpg",
+      links:[],
     },
   ],
 } as const;
