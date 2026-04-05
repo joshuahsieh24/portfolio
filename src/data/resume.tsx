@@ -8,7 +8,7 @@ export const DATA = {
   location: "San Francisco, CA",
   locationLink: "https://www.google.com/maps/place/sanfrancisco",
   description:
-    "Software Engineering student at SJSU building full-stack web and mobile apps. Interning at Delta Dental, competing in hackathons, and always shipping something new.",
+    "Software Engineering student at SJSU building full-stack web and mobile apps. Competing in hackathons, exploring new ideas, and always shipping something new.",
   summary:
     "When I'm not coding, you can find me playing sports, cooking, watching shows, or exploring new places. I care deeply about building things that make a real difference — whether that's a mental health app for college students or an emergency dispatch system that helps save lives.\n\n[Check out my blog!](https://dev.to/josh_hsiehh/welcome-to-my-blog-34cc)",
   avatarUrl: "/heyy.jpeg",
@@ -103,9 +103,9 @@ export const DATA = {
       title: "Salesforce Developer Intern",
       logoUrl: "/deltadental.png",
       start: "June 2025",
-      end: "Present",
+      end: "April 2025",
       description:
-        "Built a Salesforce case hierarchy view component to streamline complex case management for support teams. Currently developing an AI-powered email assistant using Apex and Lightning Web Components (LWC) to accelerate response workflows for dental insurance operations.",
+        "Built a Salesforce case hierarchy view component to streamline complex case management for support teams. Developed an AI-powered email assistant using Apex and Lightning Web Components (LWC) to accelerate response workflows for dental insurance operations.",
     },
     {
       company: "SJSU College of Engineering",
@@ -176,6 +176,36 @@ export const DATA = {
 
   ],
   projects: [
+    {
+      title: "Bluehour",
+      href: "https://bluehourfocus.vercel.app/",
+      target: "_blank",
+      rel: "noopener noreferrer",
+      dates: "April 2026",
+      active: true,
+      description:
+        "Fullscreen ambient focus app designed to live on a second monitor. Features six curated live scenes with canvas-rendered particle effects (rain, haze, dust), optional looping ambient audio, a minimal timer overlay with 25/50-minute presets, work mode selection, and session history tracking. Built with a pre-session → active ↔ paused → complete state machine.",
+      technologies: [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Howler.js",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://bluehourfocus.vercel.app/",
+          icon: undefined,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/joshuahsieh24/bluehour",
+          icon: undefined,
+        },
+      ],
+      image: "/bluehour.png",
+      video: undefined,
+    },
     {
       title: "Mindfit",
       href: "https://joshhsieh.netlify.app",
