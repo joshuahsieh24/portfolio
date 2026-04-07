@@ -321,14 +321,13 @@ export default function Page() {
       <section className="py-10 px-6 relative z-10 border-t border-white/[0.04]">
         <div className="max-w-5xl mx-auto">
           <BlurFade delay={BLUR_FADE_DELAY * 17}>
-            {/* Narrow cinematic band — less dominant than before */}
-            <div className="flex gap-2 mb-5">
+            <div className="grid grid-cols-3 gap-3 mb-6">
               {["/pic6.jpg", "/pic3.jpg", "/pic2.jpg"].map((src) => (
-                <div key={src} className="flex-1 overflow-hidden rounded-lg h-20">
+                <div key={src} className="overflow-hidden rounded-xl aspect-[3/2]">
                   <img
                     src={src}
                     alt=""
-                    className="w-full h-full object-cover grayscale opacity-50 hover:grayscale-0 hover:opacity-80 transition-all duration-700"
+                    className="w-full h-full object-cover grayscale opacity-60 hover:grayscale-0 hover:opacity-90 transition-all duration-700"
                   />
                 </div>
               ))}
