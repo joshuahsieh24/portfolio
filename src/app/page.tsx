@@ -19,50 +19,46 @@ const BLUR_FADE_DELAY = 0.04;
 const CustomLink = (props: any) => {
   const href = props.href;
   const isInternalLink = href && (href.startsWith('/') || href.startsWith('#'));
-
   if (isInternalLink) {
-    return (
-      <Link href={href} {...props}>
-        {props.children}
-      </Link>
-    );
+    return <Link href={href} {...props}>{props.children}</Link>;
   }
-
   return <a target="_blank" rel="noopener noreferrer" {...props} />;
 };
 
 const SKILL_GROUPS = [
-  {
-    label: "Product Layer",
-    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "React Native"],
-  },
-  {
-    label: "Backend & Data",
-    skills: ["Node.js", "Python", "FastAPI", "PostgreSQL", "Supabase", "Prisma"],
-  },
-  {
-    label: "Infrastructure",
-    skills: ["Docker", "AWS", "Firebase", "Git", "REST APIs"],
-  },
-  {
-    label: "Languages",
-    skills: ["Java", "C++"],
-  },
+  { label: "Product Layer",   skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "React Native"] },
+  { label: "Backend & Data",  skills: ["Node.js", "Python", "FastAPI", "PostgreSQL", "Supabase", "Prisma"] },
+  { label: "Infrastructure",  skills: ["Docker", "AWS", "Firebase", "Git", "REST APIs"] },
+  { label: "Languages",       skills: ["Java", "C++"] },
 ];
 
+// Inline depth content for expandable cards — not in the data layer (presentation-only)
+const PROJECT_DEPTH: Record<string, { impact: string; architecture: string; tradeoff: string }> = {
+  FinanceAI: {
+    impact: "Surfaces the highest-confidence anomalies first — reducing analyst triage time by cutting through noise before a human ever opens a dashboard.",
+    architecture: "Python ML pipeline (Isolation Forest + custom per-transaction scoring) feeds a TypeScript dashboard. Supabase handles real-time event streaming; fraud scores are computed per batch with configurable sensitivity thresholds.",
+    tradeoff: "Chose unsupervised anomaly detection over supervised classification — no labeled fraud dataset was available, and the model needed to generalize across transaction types without periodic retraining.",
+  },
+  "R.E.R.S": {
+    impact: "Eliminates manual handoff steps between dispatch and first responders — incident awareness from call intake to scene arrival in a single continuous view.",
+    architecture: "Next.js with role-based views (dispatcher vs. paramedic). FastAPI backend with PostgreSQL for incident state. Mapbox GL for real-time GPS overlays. WebSocket connections maintain live incident feeds without polling.",
+    tradeoff: "Used Mapbox over Google Maps for composable, fast-rendering incident overlays — the visual control was necessary for layering GPS pins, incident zones, and responder paths without performance degradation.",
+  },
+};
+
 export default function Page() {
+  const [expandedCard, setExpandedCard] = useState<string | null>(null);
+
   const smoothScrollTo = (elementId: string) => {
     const element = document.getElementById(elementId);
     if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
-  // Bluehour is always index 0 — treat it as the featured centerpiece
   const [bluehour, ...restProjects] = DATA.projects;
+  const primaryWork = DATA.work.slice(0, 3);
+  const additionalWork = DATA.work.slice(3);
 
   return (
     <main className="flex flex-col min-h-[100dvh] relative">
@@ -72,7 +68,7 @@ export default function Page() {
       <section id="hero" className="min-h-screen flex items-center justify-center px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <BlurFade delay={BLUR_FADE_DELAY}>
-            <div className="space-y-8">
+            <div className="space-y-7">
               <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-tight">
                 Hi, I'm{" "}
                 <span className="bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
@@ -85,9 +81,20 @@ export default function Page() {
                 <span className="text-white font-medium">product instinct</span>, and{" "}
                 <span className="text-white font-medium">design taste</span>.
               </p>
-              <div className="pt-8">
+
+              {/* Currently Building — subtle, single line */}
+              <div className="flex items-center justify-center gap-2.5 text-sm text-gray-500">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400/80 animate-pulse shrink-0" />
+                <span>
+                  Currently building{" "}
+                  <span className="text-gray-400">Bluehour</span>
+                  {" "}— a second-monitor focus environment exploring calm UX, scene rendering, and ambient sound design.
+                </span>
+              </div>
+
+              <div className="pt-6">
                 <button
-                  onClick={() => smoothScrollTo('projects')}
+                  onClick={() => smoothScrollTo("projects")}
                   className="inline-flex items-center gap-3 px-8 py-4 bg-black text-white rounded-xl font-medium hover:bg-gray-900 transition-all duration-300 hover:scale-105 border border-white/20"
                 >
                   See my work
@@ -118,30 +125,34 @@ export default function Page() {
             </div>
           </BlurFade>
 
-          {/* Bluehour — Full-width Centerpiece */}
+          {/* ── Bluehour Centerpiece ── */}
           <BlurFade delay={BLUR_FADE_DELAY * 4}>
             <div className="group relative mb-10">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-indigo-900/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm"></div>
-              <div className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden shadow-2xl hover:shadow-white/10 transition-all duration-300">
-                {/* Top: image strip */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-indigo-900/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm" />
+              <div className="relative bg-white/5 backdrop-blur-md border border-white/[0.12] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-white/5 hover:ring-white/10 transition-all duration-300">
+
+                {/* Image strip */}
                 <div className="w-full h-64 md:h-80 overflow-hidden">
                   <img
                     src="/bluehour.png"
                     alt="Bluehour"
-                    className="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-700"
+                    className="w-full h-full object-cover object-top group-hover:scale-[1.02] group-hover:brightness-110 transition-all duration-700"
                   />
                 </div>
-                {/* Bottom: case study content */}
+
+                {/* Case study content */}
                 <div className="p-8 lg:p-12 grid grid-cols-1 lg:grid-cols-2 gap-10">
-                  {/* Left: identity + overview */}
+                  {/* Left */}
                   <div className="space-y-5">
                     <div>
-                      <div className="flex items-center gap-3 mb-2">
-                        <span className="text-xs font-semibold tracking-widest text-gray-400 uppercase">Centerpiece Project</span>
-                      </div>
-                      <h3 className="text-3xl font-bold text-white mb-3">Bluehour</h3>
+                      <span className="text-xs font-semibold tracking-widest text-gray-400 uppercase">Centerpiece Project</span>
+                      <h3 className="text-3xl font-bold text-white mt-2 mb-3">Bluehour</h3>
                       <p className="text-gray-300 leading-relaxed">
                         Fullscreen ambient focus app designed to live on a second monitor — six curated live scenes with canvas-rendered particle effects, optional looping audio, and a minimal timer overlay with session history.
+                      </p>
+                      {/* Impact line */}
+                      <p className="mt-3 text-sm text-gray-500 italic">
+                        Second-monitor workflow · Sub-second scene loading · Zero-friction start · Immersion without interruption
                       </p>
                     </div>
                     <div className="flex flex-wrap gap-2">
@@ -173,7 +184,8 @@ export default function Page() {
                       </Link>
                     </div>
                   </div>
-                  {/* Right: case study */}
+
+                  {/* Right — case study */}
                   <div className="space-y-6">
                     <div>
                       <h4 className="text-xs font-semibold tracking-widest text-gray-400 uppercase mb-2">Why I Built It</h4>
@@ -184,13 +196,13 @@ export default function Page() {
                     <div>
                       <h4 className="text-xs font-semibold tracking-widest text-gray-400 uppercase mb-2">Key Product Decisions</h4>
                       <p className="text-gray-300 text-sm leading-relaxed">
-                        No accounts required. No distracting dashboards. The app opens into a scene immediately — the mental model is closer to a lamp you turn on than a product you "log into."
+                        No accounts required. No distracting dashboards. The app opens into a scene immediately — the mental model is closer to a lamp you turn on than a product you log into.
                       </p>
                     </div>
                     <div>
                       <h4 className="text-xs font-semibold tracking-widest text-gray-400 uppercase mb-2">Technical Architecture</h4>
                       <p className="text-gray-300 text-sm leading-relaxed">
-                        Canvas-rendered particle systems for each scene (rain, haze, dust) via requestAnimationFrame loops. Howler.js for seamless audio looping. A pre-session → active ↔ paused → complete state machine drives all timer logic.
+                        Canvas-rendered particle systems (rain, haze, dust) via requestAnimationFrame loops. Howler.js for seamless audio looping. A pre-session → active ↔ paused → complete state machine drives all timer logic.
                       </p>
                     </div>
                     <div>
@@ -205,31 +217,71 @@ export default function Page() {
             </div>
           </BlurFade>
 
-          {/* Remaining projects — 2-col grid */}
+          {/* ── Remaining projects — expandable 2-col grid ── */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {restProjects.map((project, id) => (
-              <BlurFade
-                key={project.title}
-                delay={BLUR_FADE_DELAY * 5 + id * 0.1}
-              >
-                <div className="group relative h-full">
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-white/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm"></div>
-                  <div className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 shadow-2xl hover:shadow-white/10 transition-all duration-300 hover:scale-[1.02] h-full">
-                    <ProjectCard
-                      href={project.href}
-                      key={project.title}
-                      title={project.title}
-                      description={project.description}
-                      dates={project.dates}
-                      tags={project.technologies}
-                      image={project.image}
-                      video={project.video}
-                      links={project.links}
-                    />
+            {restProjects.map((project, id) => {
+              const depth = PROJECT_DEPTH[project.title];
+              const isExpanded = expandedCard === project.title;
+
+              return (
+                <BlurFade key={project.title} delay={BLUR_FADE_DELAY * 5 + id * 0.1}>
+                  <div className="group relative h-full">
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-white/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm" />
+                    <div className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 shadow-2xl hover:shadow-white/10 transition-all duration-300 hover:scale-[1.02] h-full flex flex-col">
+                      <ProjectCard
+                        href={project.href}
+                        key={project.title}
+                        title={project.title}
+                        description={project.description}
+                        dates={project.dates}
+                        tags={project.technologies}
+                        image={project.image}
+                        video={project.video}
+                        links={project.links}
+                      />
+
+                      {/* Impact line */}
+                      {depth && (
+                        <p className="mt-4 text-sm text-gray-500 italic">
+                          {depth.impact}
+                        </p>
+                      )}
+
+                      {/* Expandable depth — only for projects with depth content */}
+                      {depth && (
+                        <div className="mt-4">
+                          <button
+                            onClick={() => setExpandedCard(isExpanded ? null : project.title)}
+                            className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-300 transition-colors duration-200 group/btn"
+                          >
+                            <svg
+                              className={`w-3.5 h-3.5 transition-transform duration-300 ${isExpanded ? "rotate-90" : ""}`}
+                              fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                            {isExpanded ? "Hide details" : "Architecture & tradeoffs"}
+                          </button>
+
+                          {isExpanded && (
+                            <div className="mt-4 space-y-4 border-t border-white/10 pt-4">
+                              <div>
+                                <h5 className="text-xs font-semibold tracking-widest text-gray-400 uppercase mb-1.5">Architecture</h5>
+                                <p className="text-gray-400 text-sm leading-relaxed">{depth.architecture}</p>
+                              </div>
+                              <div>
+                                <h5 className="text-xs font-semibold tracking-widest text-gray-400 uppercase mb-1.5">Key Tradeoff</h5>
+                                <p className="text-gray-400 text-sm leading-relaxed">{depth.tradeoff}</p>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              </BlurFade>
-            ))}
+                </BlurFade>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -257,7 +309,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ── Work Experience ───────────────────────────────── */}
+      {/* ── Experience ────────────────────────────────────── */}
       <section id="work" className="py-20 px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
           <BlurFade delay={BLUR_FADE_DELAY * 10}>
@@ -270,14 +322,13 @@ export default function Page() {
               </p>
             </div>
           </BlurFade>
+
+          {/* Primary roles — full cards */}
           <div className="space-y-6">
-            {DATA.work.map((work, id) => (
-              <BlurFade
-                key={work.company}
-                delay={BLUR_FADE_DELAY * 11 + id * 0.08}
-              >
+            {primaryWork.map((work, id) => (
+              <BlurFade key={work.company} delay={BLUR_FADE_DELAY * 11 + id * 0.08}>
                 <div className="group relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-white/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-white/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm" />
                   <div className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 shadow-2xl hover:shadow-white/10 transition-all duration-300 hover:scale-[1.02]">
                     <ResumeCard
                       key={work.company}
@@ -297,13 +348,41 @@ export default function Page() {
               </BlurFade>
             ))}
           </div>
+
+          {/* Additional experience — visually de-emphasized */}
+          <BlurFade delay={BLUR_FADE_DELAY * 14}>
+            <div className="mt-10">
+              <p className="text-xs font-semibold tracking-widest text-gray-500 uppercase mb-5 ml-1">
+                Additional Experience
+              </p>
+              <div className="divide-y divide-white/5 border border-white/10 rounded-2xl overflow-hidden">
+                {additionalWork.map((work) => (
+                  <div key={work.company} className="flex items-center justify-between px-6 py-4 hover:bg-white/5 transition-colors duration-200">
+                    <div className="flex items-center gap-4">
+                      {work.logoUrl && (
+                        <img src={work.logoUrl} alt={work.company} className="w-6 h-6 rounded-full object-cover opacity-60" />
+                      )}
+                      <div>
+                        <span className="text-sm font-medium text-gray-300">{work.company}</span>
+                        <span className="text-gray-600 mx-2">·</span>
+                        <span className="text-sm text-gray-500">{work.title}</span>
+                      </div>
+                    </div>
+                    <span className="text-xs text-gray-600 shrink-0 ml-4">
+                      {work.start} – {work.end ?? "Present"}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </BlurFade>
         </div>
       </section>
 
       {/* ── How I Think ───────────────────────────────────── */}
       <section id="thinking" className="py-20 px-6 bg-white/5 relative z-10">
         <div className="max-w-6xl mx-auto">
-          <BlurFade delay={BLUR_FADE_DELAY * 14}>
+          <BlurFade delay={BLUR_FADE_DELAY * 15}>
             <div className="text-center mb-14">
               <h2 className="text-5xl sm:text-6xl font-bold tracking-tight text-white mb-4">
                 How I Think
@@ -336,9 +415,9 @@ export default function Page() {
                 body: "The measure of a feature is whether someone uses it — not whether it was technically interesting to build. I stay user-anchored.",
               },
             ].map((principle, id) => (
-              <BlurFade key={principle.label} delay={BLUR_FADE_DELAY * 15 + id * 0.08}>
+              <BlurFade key={principle.label} delay={BLUR_FADE_DELAY * 16 + id * 0.08}>
                 <div className="group relative h-full">
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-white/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-white/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm" />
                   <div className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 shadow-xl hover:shadow-white/10 transition-all duration-300 hover:scale-[1.02] h-full">
                     <span className="text-xs font-semibold tracking-widest text-gray-500 uppercase">{principle.label}</span>
                     <h3 className="text-lg font-semibold text-white mt-3 mb-3 leading-snug">{principle.title}</h3>
@@ -351,20 +430,20 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ── Skills ────────────────────────────────────────── */}
+      {/* ── Stack ─────────────────────────────────────────── */}
       <section id="skills" className="py-20 px-6 relative z-10">
         <div className="max-w-5xl mx-auto">
-          <BlurFade delay={BLUR_FADE_DELAY * 17}>
+          <BlurFade delay={BLUR_FADE_DELAY * 18}>
             <div className="text-center mb-14">
               <h2 className="text-5xl sm:text-6xl font-bold tracking-tight text-white mb-4">
                 Stack
               </h2>
               <p className="text-lg text-gray-400 max-w-xl mx-auto">
-                Tools I reach for without thinking — and know deeply enough to know their limits
+                Tools I know deeply enough to make tradeoffs with confidence
               </p>
             </div>
           </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 18}>
+          <BlurFade delay={BLUR_FADE_DELAY * 19}>
             <div className="space-y-6">
               {SKILL_GROUPS.map((group) => (
                 <div key={group.label} className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
@@ -392,7 +471,7 @@ export default function Page() {
       {/* ── Hackathons ────────────────────────────────────── */}
       <section id="hackathons" className="py-20 px-6 bg-white/5 relative z-10">
         <div className="max-w-6xl mx-auto">
-          <BlurFade delay={BLUR_FADE_DELAY * 19}>
+          <BlurFade delay={BLUR_FADE_DELAY * 20}>
             <div className="text-center mb-14">
               <div className="inline-block rounded-full bg-white/10 border border-white/20 px-5 py-2 text-sm text-white mb-6 backdrop-blur-sm">
                 Hackathons
@@ -407,12 +486,9 @@ export default function Page() {
           </BlurFade>
           <div className="space-y-6">
             {DATA.hackathons.map((project, id) => (
-              <BlurFade
-                key={project.title + project.dates}
-                delay={BLUR_FADE_DELAY * 20 + id * 0.1}
-              >
+              <BlurFade key={project.title + project.dates} delay={BLUR_FADE_DELAY * 21 + id * 0.1}>
                 <div className="group relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-white/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-white/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm" />
                   <div className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 shadow-2xl hover:shadow-white/10 transition-all duration-300 hover:scale-[1.02]">
                     <HackathonCard
                       title={project.title}
@@ -433,18 +509,15 @@ export default function Page() {
       {/* ── Contact ───────────────────────────────────────── */}
       <section id="contact" className="py-20 px-6 relative z-10">
         <div className="max-w-5xl mx-auto text-center">
-          <BlurFade delay={BLUR_FADE_DELAY * 21}>
-            <div className="space-y-10">
-              <div className="inline-block rounded-full bg-white/10 border border-white/20 px-5 py-2 text-sm text-white backdrop-blur-sm">
-                Let's Connect
-              </div>
+          <BlurFade delay={BLUR_FADE_DELAY * 22}>
+            <div className="space-y-8">
               <h2 className="text-5xl sm:text-6xl font-bold tracking-tight text-white">
-                Get in Touch
+                Let's Talk
               </h2>
-              <p className="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                Open to internships, full-time roles, and projects worth building.
+              <p className="text-lg text-gray-400 max-w-xl mx-auto leading-relaxed">
+                I'm looking for my next internship or full-time role — somewhere I can ship at the intersection of engineering, product, and design.
               </p>
-              <div className="flex flex-col sm:flex-row gap-5 justify-center items-center pt-8">
+              <div className="flex flex-col sm:flex-row gap-5 justify-center items-center pt-6">
                 <Link
                   href={DATA.contact.social.LinkedIn.url}
                   target="_blank"
@@ -473,52 +546,28 @@ export default function Page() {
 
       {/* ── Footer ────────────────────────────────────────── */}
       <footer className="py-12 px-6 bg-background border-t border-border/20">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto flex flex-col items-center gap-8">
+          {/* Philosophy line */}
+          <p className="text-sm text-gray-600 italic text-center">
+            Software should reduce friction between intent and action.
+          </p>
           <div className="flex flex-col items-center space-y-4">
-            <Link
-              href={`mailto:${DATA.contact.email}`}
-              className="text-lg font-medium hover:opacity-70 transition-opacity"
-            >
+            <Link href={`mailto:${DATA.contact.email}`} className="text-lg font-medium hover:opacity-70 transition-opacity">
               Email
             </Link>
-            <Link
-              href="/JoshuaHsiehResume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-lg font-medium hover:opacity-70 transition-opacity"
-            >
+            <Link href="/JoshuaHsiehResume.pdf" target="_blank" rel="noopener noreferrer" className="text-lg font-medium hover:opacity-70 transition-opacity">
               Resume
             </Link>
-            <Link
-              href={DATA.contact.social.LinkedIn.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-lg font-medium hover:opacity-70 transition-opacity"
-            >
+            <Link href={DATA.contact.social.LinkedIn.url} target="_blank" rel="noopener noreferrer" className="text-lg font-medium hover:opacity-70 transition-opacity">
               LinkedIn
             </Link>
-            <Link
-              href={DATA.contact.social.GitHub.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-lg font-medium hover:opacity-70 transition-opacity"
-            >
+            <Link href={DATA.contact.social.GitHub.url} target="_blank" rel="noopener noreferrer" className="text-lg font-medium hover:opacity-70 transition-opacity">
               GitHub
             </Link>
-            <Link
-              href="https://dev.to/josh_hsiehh"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-lg font-medium hover:opacity-70 transition-opacity"
-            >
+            <Link href="https://dev.to/josh_hsiehh" target="_blank" rel="noopener noreferrer" className="text-lg font-medium hover:opacity-70 transition-opacity">
               Blog
             </Link>
-            <Link
-              href="https://www.youtube.com/@Joshua-wg5lt"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-lg font-medium hover:opacity-70 transition-opacity"
-            >
+            <Link href="https://www.youtube.com/@Joshua-wg5lt" target="_blank" rel="noopener noreferrer" className="text-lg font-medium hover:opacity-70 transition-opacity">
               YouTube
             </Link>
           </div>
