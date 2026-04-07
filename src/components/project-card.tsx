@@ -1,15 +1,20 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import Link from "next/link";
 import Markdown from "react-markdown";
+import { useState } from "react";
+
+interface DepthSection {
+  title: string;
+  body: string;
+}
+
+export interface ProjectDepth {
+  label: string;
+  sections: DepthSection[];
+}
 
 interface Props {
   title: string;
@@ -28,6 +33,8 @@ interface Props {
     rel?: string;
   }[];
   className?: string;
+  impact?: string;
+  depth?: ProjectDepth;
 }
 
 export function ProjectCard({
@@ -41,13 +48,19 @@ export function ProjectCard({
   video,
   links,
   className,
+  impact,
+  depth,
 }: Props) {
+  const [expanded, setExpanded] = useState(false);
+
   return (
-    <Card
-      className="flex flex-col overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm hover:shadow-lg hover:bg-white/10 transition-all duration-300 ease-out h-full group"
-      style={{ margin: 0, padding: 0 }}
+    <div
+      className={cn(
+        "flex flex-col h-full overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-sm transition-all duration-300",
+        className
+      )}
     >
-      {/* ❌ Remove Link wrapping the media */}
+      {/* ── Media — full bleed, no background ── */}
       {video && (
         <video
           src={video}
@@ -55,76 +68,78 @@ export function ProjectCard({
           loop
           muted
           playsInline
-          className="pointer-events-none mx-auto h-40 w-full object-cover object-top"
+          className="pointer-events-none w-full h-44 object-cover object-top"
         />
       )}
       {image && (
-        <div className="relative h-40 w-full overflow-hidden bg-secondary" style={{ margin: 0, padding: 0 }}>
+        <div className="relative h-44 w-full overflow-hidden">
           <img
             src={image}
             alt={title}
-            className="h-full w-full object-cover object-center"
-            style={{ 
-              objectPosition: 'center top',
-              margin: 0,
-              padding: 0
-            }}
+            className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
           />
+          {/* Subtle fade from image into card body */}
+          <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-black/40 to-transparent" />
         </div>
       )}
 
-      {/* ✅ Move Link to ONLY wrap title if href exists */}
-      <CardHeader className="px-2">
-        <div className="space-y-1">
+      {/* ── Content ── */}
+      <div className="flex flex-col flex-1 px-5 pt-4 pb-5 gap-3">
+        {/* Title + date */}
+        <div>
           {href ? (
             <Link
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className={cn("block", className)}
+              className="block group/title"
             >
-              <CardTitle className="mt-1 text-base text-white group-hover:text-gray-200 transition-colors duration-200">{title}</CardTitle>
+              <h3 className="text-sm font-semibold text-white group-hover/title:text-gray-200 transition-colors leading-snug">
+                {title}
+              </h3>
             </Link>
           ) : (
-            <CardTitle className="mt-1 text-base text-white group-hover:text-gray-200 transition-colors duration-200">{title}</CardTitle>
+            <h3 className="text-sm font-semibold text-white leading-snug">{title}</h3>
           )}
-          <time className="font-sans text-xs text-gray-300">{dates}</time>
-          <div className="hidden font-sans text-xs underline print:visible">
-            {link?.replace("https://", "").replace("www.", "").replace("/", "")}
-          </div>
-          <Markdown className="prose max-w-full text-pretty font-sans text-xs text-gray-300 dark:prose-invert prose-headings:text-white prose-a:text-white">
-            {description}
-          </Markdown>
+          <time className="text-[11px] text-gray-600 mt-0.5 block">{dates}</time>
         </div>
-      </CardHeader>
 
-      <CardContent className="mt-auto flex flex-col px-2">
+        {/* Description */}
+        <Markdown className="prose max-w-full font-sans text-xs text-gray-400 dark:prose-invert prose-headings:text-white prose-a:text-white leading-relaxed">
+          {description}
+        </Markdown>
+
+        {/* Impact — always visible, subtle */}
+        {impact && (
+          <p className="text-[11px] text-gray-600 italic leading-relaxed">{impact}</p>
+        )}
+
+        {/* Tags */}
         {tags && tags.length > 0 && (
-          <div className="mt-2 flex flex-wrap gap-1">
+          <div className="flex flex-wrap gap-1.5 mt-auto pt-1">
             {tags.map((tag) => (
               <Badge
-                className="px-1 py-0 text-[10px] bg-white/10 text-white border border-white/30"
-                variant="secondary"
                 key={tag}
+                className="px-2 py-0.5 text-[10px] font-medium bg-white/[0.05] text-gray-400 border border-white/[0.1] hover:bg-white/[0.08] transition-colors rounded-md"
+                variant="secondary"
               >
                 {tag}
               </Badge>
             ))}
           </div>
         )}
-      </CardContent>
 
-      <CardFooter className="px-2 pb-2">
+        {/* Links */}
         {links && links.length > 0 && (
-          <div className="flex flex-row flex-wrap items-start gap-1">
+          <div className="flex flex-row flex-wrap items-center gap-1.5">
             {links.map((link, idx) => (
               <Link
-                href={link.href}
                 key={idx}
+                href={link.href}
                 target={link.target || "_blank"}
                 rel={link.rel || "noopener noreferrer"}
               >
-                <Badge key={idx} className="flex gap-2 px-2 py-1 text-[10px] bg-white/10 text-white border border-white/30 hover:bg-white/20 transition-colors duration-200">
+                <Badge className="flex gap-1.5 px-2 py-1 text-[10px] font-medium bg-white/[0.05] text-gray-400 border border-white/[0.1] hover:bg-white/[0.08] transition-colors rounded-md">
                   {link.icon}
                   {link.type}
                 </Badge>
@@ -132,7 +147,43 @@ export function ProjectCard({
             ))}
           </div>
         )}
-      </CardFooter>
-    </Card>
+
+        {/* ── Expandable depth — consistent across all cards ── */}
+        {depth && (
+          <div className="border-t border-white/[0.06] pt-3 mt-1">
+            <button
+              onClick={() => setExpanded(!expanded)}
+              className="flex items-center gap-1.5 text-[11px] text-gray-600 hover:text-gray-300 transition-colors duration-200 select-none"
+            >
+              <svg
+                className={cn(
+                  "w-3 h-3 transition-transform duration-200 shrink-0",
+                  expanded && "rotate-90"
+                )}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+              {expanded ? `Hide ${depth.label.toLowerCase()}` : depth.label}
+            </button>
+
+            {expanded && (
+              <div className="mt-4 space-y-4">
+                {depth.sections.map((section) => (
+                  <div key={section.title}>
+                    <h5 className="text-[10px] font-semibold tracking-widest text-gray-500 uppercase mb-1.5">
+                      {section.title}
+                    </h5>
+                    <p className="text-[11px] text-gray-400 leading-relaxed">{section.body}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

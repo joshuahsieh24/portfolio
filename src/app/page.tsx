@@ -3,7 +3,7 @@
 import { HackathonCard } from "@/components/hackathon-card";
 import BlurFade from "@/components/magicui/blur-fade";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
-import { ProjectCard } from "@/components/project-card";
+import { ProjectCard, ProjectDepth } from "@/components/project-card";
 import { ResumeCard } from "@/components/resume-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -25,6 +25,74 @@ const CustomLink = (props: any) => {
   return <a target="_blank" rel="noopener noreferrer" {...props} />;
 };
 
+// Per-project depth content — presentation layer only, not in data
+const PROJECT_DETAILS: Record<string, { impact: string; depth: ProjectDepth }> = {
+  FinanceAI: {
+    impact: "Surfaces the highest-confidence anomalies first — cutting analyst triage time by reducing noise before a human ever opens a dashboard.",
+    depth: {
+      label: "Architecture & tradeoffs",
+      sections: [
+        {
+          title: "Architecture",
+          body: "Python ML pipeline (Isolation Forest + custom per-transaction scoring) feeds a TypeScript dashboard. Supabase handles real-time event streaming; fraud scores are computed per batch with configurable sensitivity thresholds.",
+        },
+        {
+          title: "Key tradeoff",
+          body: "Chose unsupervised anomaly detection over supervised classification — no labeled fraud dataset was available, and the model needed to generalize across transaction types without periodic retraining.",
+        },
+      ],
+    },
+  },
+  "R.E.R.S": {
+    impact: "Eliminates manual handoff steps between dispatch and first responders — incident awareness from call intake to scene arrival in one continuous view.",
+    depth: {
+      label: "Architecture & tradeoffs",
+      sections: [
+        {
+          title: "Architecture",
+          body: "Next.js with role-based views (dispatcher vs. paramedic). FastAPI backend + PostgreSQL for incident state. Mapbox GL for real-time GPS overlays. WebSocket connections maintain live incident feeds without polling.",
+        },
+        {
+          title: "Key tradeoff",
+          body: "Used Mapbox over Google Maps for composable, fast-rendering incident overlays — the visual control was necessary for layering GPS pins, incident zones, and responder paths without performance degradation.",
+        },
+      ],
+    },
+  },
+  Snug: {
+    impact: "Designed for the moment a student needs help most — no account, no friction, immediate support.",
+    depth: {
+      label: "Product decisions",
+      sections: [
+        {
+          title: "Why a kiosk?",
+          body: "A phone app requires sign-up, downloads, and sitting next to the distractions a student in distress is trying to escape. A physical kiosk creates a dedicated, intentional space — you walk up because you chose to, not because something appeared in your feed.",
+        },
+        {
+          title: "Constraints I worked within",
+          body: "Campus network, 10-inch touchscreen, no persistent user storage, 24-hour build window. Each constraint pushed the product toward simpler, faster, more focused interactions — which turned out to be the right call for the use case.",
+        },
+      ],
+    },
+  },
+  ToGoBot: {
+    impact: "Built around one question: what's the fastest path to the demo? Everything else is secondary.",
+    depth: {
+      label: "Implementation notes",
+      sections: [
+        {
+          title: "The communication problem",
+          body: "Communicating a physical navigation system through a web interface requires making the invisible visible. Embedded a live video walkthrough as the hero — static screenshots can't convey motion, pathfinding, or obstacle avoidance behavior.",
+        },
+        {
+          title: "What I learned",
+          body: "A marketing site is a product decision, not just a frontend task. Firebase kept the backend footprint near zero. The entire architecture reduces to one CTA: watch the demo.",
+        },
+      ],
+    },
+  },
+};
+
 const SKILL_GROUPS = [
   { label: "Product Layer",   skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "React Native"] },
   { label: "Backend & Data",  skills: ["Node.js", "Python", "FastAPI", "PostgreSQL", "Supabase", "Prisma"] },
@@ -32,23 +100,8 @@ const SKILL_GROUPS = [
   { label: "Languages",       skills: ["Java", "C++"] },
 ];
 
-// Inline depth content for expandable cards — not in the data layer (presentation-only)
-const PROJECT_DEPTH: Record<string, { impact: string; architecture: string; tradeoff: string }> = {
-  FinanceAI: {
-    impact: "Surfaces the highest-confidence anomalies first — reducing analyst triage time by cutting through noise before a human ever opens a dashboard.",
-    architecture: "Python ML pipeline (Isolation Forest + custom per-transaction scoring) feeds a TypeScript dashboard. Supabase handles real-time event streaming; fraud scores are computed per batch with configurable sensitivity thresholds.",
-    tradeoff: "Chose unsupervised anomaly detection over supervised classification — no labeled fraud dataset was available, and the model needed to generalize across transaction types without periodic retraining.",
-  },
-  "R.E.R.S": {
-    impact: "Eliminates manual handoff steps between dispatch and first responders — incident awareness from call intake to scene arrival in a single continuous view.",
-    architecture: "Next.js with role-based views (dispatcher vs. paramedic). FastAPI backend with PostgreSQL for incident state. Mapbox GL for real-time GPS overlays. WebSocket connections maintain live incident feeds without polling.",
-    tradeoff: "Used Mapbox over Google Maps for composable, fast-rendering incident overlays — the visual control was necessary for layering GPS pins, incident zones, and responder paths without performance degradation.",
-  },
-};
 
 export default function Page() {
-  const [expandedCard, setExpandedCard] = useState<string | null>(null);
-
   const smoothScrollTo = (elementId: string) => {
     const element = document.getElementById(elementId);
     if (element) {
@@ -217,67 +270,27 @@ export default function Page() {
             </div>
           </BlurFade>
 
-          {/* ── Remaining projects — expandable 2-col grid ── */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* ── Remaining projects — 2-col grid ── */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {restProjects.map((project, id) => {
-              const depth = PROJECT_DEPTH[project.title];
-              const isExpanded = expandedCard === project.title;
-
+              const details = PROJECT_DETAILS[project.title];
               return (
                 <BlurFade key={project.title} delay={BLUR_FADE_DELAY * 5 + id * 0.1}>
-                  <div className="group relative h-full">
-                    <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-white/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm" />
-                    <div className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 shadow-2xl hover:shadow-white/10 transition-all duration-300 hover:scale-[1.02] h-full flex flex-col">
-                      <ProjectCard
-                        href={project.href}
-                        key={project.title}
-                        title={project.title}
-                        description={project.description}
-                        dates={project.dates}
-                        tags={project.technologies}
-                        image={project.image}
-                        video={project.video}
-                        links={project.links}
-                      />
-
-                      {/* Impact line */}
-                      {depth && (
-                        <p className="mt-4 text-sm text-gray-500 italic">
-                          {depth.impact}
-                        </p>
-                      )}
-
-                      {/* Expandable depth — only for projects with depth content */}
-                      {depth && (
-                        <div className="mt-4">
-                          <button
-                            onClick={() => setExpandedCard(isExpanded ? null : project.title)}
-                            className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-300 transition-colors duration-200 group/btn"
-                          >
-                            <svg
-                              className={`w-3.5 h-3.5 transition-transform duration-300 ${isExpanded ? "rotate-90" : ""}`}
-                              fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            >
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
-                            {isExpanded ? "Hide details" : "Architecture & tradeoffs"}
-                          </button>
-
-                          {isExpanded && (
-                            <div className="mt-4 space-y-4 border-t border-white/10 pt-4">
-                              <div>
-                                <h5 className="text-xs font-semibold tracking-widest text-gray-400 uppercase mb-1.5">Architecture</h5>
-                                <p className="text-gray-400 text-sm leading-relaxed">{depth.architecture}</p>
-                              </div>
-                              <div>
-                                <h5 className="text-xs font-semibold tracking-widest text-gray-400 uppercase mb-1.5">Key Tradeoff</h5>
-                                <p className="text-gray-400 text-sm leading-relaxed">{depth.tradeoff}</p>
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </div>
+                  <div className="group relative h-full hover:scale-[1.015] transition-transform duration-300">
+                    {/* Hover glow — subtler than before */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.04] to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm pointer-events-none" />
+                    <ProjectCard
+                      href={project.href}
+                      title={project.title}
+                      description={project.description}
+                      dates={project.dates}
+                      tags={project.technologies}
+                      image={project.image}
+                      video={project.video}
+                      links={project.links}
+                      impact={details?.impact}
+                      depth={details?.depth}
+                    />
                   </div>
                 </BlurFade>
               );
