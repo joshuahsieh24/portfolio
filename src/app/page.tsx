@@ -300,7 +300,7 @@ export default function Page() {
       </section>
 
       {/* ── About ─────────────────────────────────────────── */}
-      <section id="about" className="py-20 px-6 bg-white/5 relative z-10">
+      <section id="about" className="py-20 px-6 relative z-10 border-t border-white/[0.04]">
         <div className="max-w-5xl mx-auto">
           <BlurFade delay={BLUR_FADE_DELAY * 8}>
             <div className="text-center mb-14">
@@ -393,7 +393,7 @@ export default function Page() {
       </section>
 
       {/* ── How I Think ───────────────────────────────────── */}
-      <section id="thinking" className="py-20 px-6 bg-white/5 relative z-10">
+      <section id="thinking" className="py-20 px-6 relative z-10 border-t border-white/[0.04]">
         <div className="max-w-6xl mx-auto">
           <BlurFade delay={BLUR_FADE_DELAY * 15}>
             <div className="text-center mb-14">
@@ -443,8 +443,58 @@ export default function Page() {
         </div>
       </section>
 
+      {/* ── Outside the screen ───────────────────────────── */}
+      {/* No heading — intentional. A pause, not a section. */}
+      <section className="py-16 px-6 relative z-10 border-t border-white/[0.04]">
+        <div className="max-w-6xl mx-auto">
+          <BlurFade delay={BLUR_FADE_DELAY * 17}>
+            {/* Three cinematic photos — grayscale at rest, color on hover */}
+            <div className="grid grid-cols-3 gap-3 mb-10">
+              {[
+                { src: "/pic6.jpg", alt: "Mossy forest trail", pos: "object-center" },
+                { src: "/pic3.jpg", alt: "Snow cabin through doorframe", pos: "object-center" },
+                { src: "/pic2.jpg", alt: "Forest walk, sun through pines", pos: "object-center" },
+              ].map((photo) => (
+                <div
+                  key={photo.src}
+                  className="overflow-hidden rounded-xl aspect-[3/2] bg-white/[0.02]"
+                >
+                  <img
+                    src={photo.src}
+                    alt={photo.alt}
+                    className={`w-full h-full object-cover ${photo.pos} grayscale opacity-60 hover:grayscale-0 hover:opacity-90 transition-all duration-700 ease-in-out`}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Typographic "currently" — three quiet data points */}
+            <div className="flex flex-col sm:flex-row gap-6 sm:gap-12">
+              <div>
+                <span className="text-[10px] font-semibold tracking-widest text-gray-600 uppercase block mb-1">
+                  Listening to
+                </span>
+                <p className="text-sm text-gray-400">Nils Frahm · Jon Hopkins · Bill Evans</p>
+              </div>
+              <div>
+                <span className="text-[10px] font-semibold tracking-widest text-gray-600 uppercase block mb-1">
+                  Outside work
+                </span>
+                <p className="text-sm text-gray-400">badminton · cooking · hiking</p>
+              </div>
+              <div>
+                <span className="text-[10px] font-semibold tracking-widest text-gray-600 uppercase block mb-1">
+                  Typing speed
+                </span>
+                <p className="text-sm text-gray-400">210 wpm · 100% accuracy</p>
+              </div>
+            </div>
+          </BlurFade>
+        </div>
+      </section>
+
       {/* ── Stack ─────────────────────────────────────────── */}
-      <section id="skills" className="py-20 px-6 relative z-10">
+      <section id="skills" className="py-20 px-6 relative z-10 border-t border-white/[0.04]">
         <div className="max-w-5xl mx-auto">
           <BlurFade delay={BLUR_FADE_DELAY * 18}>
             <div className="text-center mb-14">
@@ -482,7 +532,7 @@ export default function Page() {
       </section>
 
       {/* ── Hackathons ────────────────────────────────────── */}
-      <section id="hackathons" className="py-20 px-6 bg-white/5 relative z-10">
+      <section id="hackathons" className="py-20 px-6 relative z-10 border-t border-white/[0.04]">
         <div className="max-w-6xl mx-auto">
           <BlurFade delay={BLUR_FADE_DELAY * 20}>
             <div className="text-center mb-14">
@@ -520,7 +570,7 @@ export default function Page() {
       </section>
 
       {/* ── Contact ───────────────────────────────────────── */}
-      <section id="contact" className="py-20 px-6 relative z-10">
+      <section id="contact" className="py-20 px-6 relative z-10 border-t border-white/[0.04]">
         <div className="max-w-5xl mx-auto text-center">
           <BlurFade delay={BLUR_FADE_DELAY * 22}>
             <div className="space-y-8">
