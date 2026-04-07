@@ -211,7 +211,7 @@ export const DATA = {
       href: "https://www.youtube.com/watch?v=VErtACNBZ7w",
       target: "_blank",
       rel: "noopener noreferrer",
-      dates: "April 2025",
+      dates: "July 2025",
       active: true,
       description:
         "Financial analysis web app with a machine learning pipeline for real-time fraud detection on transaction data. Features interactive risk dashboards, anomaly scoring, and alert systems — built with a Python/TypeScript stack and production-level architecture.",
@@ -248,7 +248,7 @@ export const DATA = {
       href: "https://snuggiebot.netlify.app/",
       target: "_blank",
       rel: "noopener noreferrer",
-      dates: "March 2025 - Present",
+      dates: "March 2025",
       active: true,
       description:
         "Led a team of 6 to build a kiosk-based mental health app for college campuses. Features an AI-powered emotional support chatbot, anonymous session handling, and real-time conversation state. Presented at SpartUp Hackathon as a solution to the campus mental health crisis.",
