@@ -25,7 +25,6 @@ const CustomLink = (props: any) => {
   return <a target="_blank" rel="noopener noreferrer" {...props} />;
 };
 
-// Per-project depth content — presentation layer only, not in data
 const PROJECT_DETAILS: Record<string, { impact: string; depth: ProjectDepth }> = {
   FinanceAI: {
     impact: "Surfaces the highest-confidence anomalies first — cutting analyst triage time by reducing noise before a human ever opens a dashboard.",
@@ -59,47 +58,14 @@ const PROJECT_DETAILS: Record<string, { impact: string; depth: ProjectDepth }> =
       ],
     },
   },
-  Snug: {
-    impact: "Designed for the moment a student needs help most — no account, no friction, immediate support.",
-    depth: {
-      label: "Product decisions",
-      sections: [
-        {
-          title: "Why a kiosk?",
-          body: "A phone app requires sign-up, downloads, and sitting next to the distractions a student in distress is trying to escape. A physical kiosk creates a dedicated, intentional space — you walk up because you chose to, not because something appeared in your feed.",
-        },
-        {
-          title: "Constraints I worked within",
-          body: "Campus network, 10-inch touchscreen, no persistent user storage, 24-hour build window. Each constraint pushed the product toward simpler, faster, more focused interactions — which turned out to be the right call for the use case.",
-        },
-      ],
-    },
-  },
-  ToGoBot: {
-    impact: "Built around one question: what's the fastest path to the demo? Everything else is secondary.",
-    depth: {
-      label: "Implementation notes",
-      sections: [
-        {
-          title: "The communication problem",
-          body: "Communicating a physical navigation system through a web interface requires making the invisible visible. Embedded a live video walkthrough as the hero — static screenshots can't convey motion, pathfinding, or obstacle avoidance behavior.",
-        },
-        {
-          title: "What I learned",
-          body: "A marketing site is a product decision, not just a frontend task. Firebase kept the backend footprint near zero. The entire architecture reduces to one CTA: watch the demo.",
-        },
-      ],
-    },
-  },
 };
 
 const SKILL_GROUPS = [
-  { label: "Product Layer",   skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "React Native"] },
-  { label: "Backend & Data",  skills: ["Node.js", "Python", "FastAPI", "PostgreSQL", "Supabase", "Prisma"] },
-  { label: "Infrastructure",  skills: ["Docker", "AWS", "Firebase", "Git", "REST APIs"] },
-  { label: "Languages",       skills: ["Java", "C++"] },
+  { label: "Product Layer",  skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "React Native"] },
+  { label: "Backend & Data", skills: ["Node.js", "Python", "FastAPI", "PostgreSQL", "Supabase", "Prisma"] },
+  { label: "Infrastructure", skills: ["Docker", "AWS", "Firebase", "Git", "REST APIs"] },
+  { label: "Languages",      skills: ["Java", "C++"] },
 ];
-
 
 export default function Page() {
   const smoothScrollTo = (elementId: string) => {
@@ -109,19 +75,23 @@ export default function Page() {
     }
   };
 
-  const [bluehour, ...restProjects] = DATA.projects;
-  const primaryWork = DATA.work.slice(0, 3);
-  const additionalWork = DATA.work.slice(3);
+  const [bluehour, ...allRest] = DATA.projects;
+  // Show only the two strongest additional projects
+  const featuredProjects = allRest.slice(0, 2);
+  // Two primary roles; rest go to the compact list
+  const primaryWork = DATA.work.slice(0, 2);
+  const additionalWork = DATA.work.slice(2);
 
   return (
     <main className="flex flex-col min-h-[100dvh] relative">
       <AnimatedBackground />
 
       {/* ── Hero ─────────────────────────────────────────── */}
-      <section id="hero" className="min-h-screen flex items-center justify-center px-6 relative z-10">
+      {/* Compact — does not consume full viewport */}
+      <section id="hero" className="pt-36 pb-20 px-6 flex items-center justify-center relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <BlurFade delay={BLUR_FADE_DELAY}>
-            <div className="space-y-7">
+            <div className="space-y-6">
               <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-tight">
                 Hi, I'm{" "}
                 <span className="bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
@@ -134,8 +104,7 @@ export default function Page() {
                 <span className="text-white font-medium">product instinct</span>, and{" "}
                 <span className="text-white font-medium">design taste</span>.
               </p>
-
-              {/* Currently Building — subtle, single line */}
+              {/* Currently building — single subdued line */}
               <div className="flex items-center justify-center gap-2.5 text-sm text-gray-500">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-400/80 animate-pulse shrink-0" />
                 <span>
@@ -144,8 +113,7 @@ export default function Page() {
                   {" "}— a second-monitor focus environment exploring calm UX, scene rendering, and ambient sound design.
                 </span>
               </div>
-
-              <div className="pt-6">
+              <div className="pt-4">
                 <button
                   onClick={() => smoothScrollTo("projects")}
                   className="inline-flex items-center gap-3 px-8 py-4 bg-black text-white rounded-xl font-medium hover:bg-gray-900 transition-all duration-300 hover:scale-105 border border-white/20"
@@ -162,29 +130,22 @@ export default function Page() {
       </section>
 
       {/* ── Featured Work ─────────────────────────────────── */}
-      <section id="projects" className="py-20 px-6 relative z-10">
+      <section id="projects" className="py-14 px-6 relative z-10 border-t border-white/[0.04]">
         <div className="max-w-6xl mx-auto">
           <BlurFade delay={BLUR_FADE_DELAY * 3}>
-            <div className="text-center mb-16">
-              <div className="inline-block rounded-full bg-white/10 border border-white/20 px-5 py-2 text-sm text-white mb-6 backdrop-blur-sm">
-                Featured Work
-              </div>
-              <h2 className="text-5xl sm:text-6xl font-bold tracking-tight text-white mb-4">
+            <div className="mb-10">
+              <span className="text-[11px] font-semibold tracking-widest text-gray-500 uppercase">Featured Work</span>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mt-2">
                 Things I've Built
               </h2>
-              <p className="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                Each project reflects a real problem, a deliberate product decision, and an opinion about how software should feel.
-              </p>
             </div>
           </BlurFade>
 
           {/* ── Bluehour Centerpiece ── */}
           <BlurFade delay={BLUR_FADE_DELAY * 4}>
-            <div className="group relative mb-10">
+            <div className="group relative mb-8">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-indigo-900/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm" />
               <div className="relative bg-white/5 backdrop-blur-md border border-white/[0.12] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-white/5 hover:ring-white/10 transition-all duration-300">
-
-                {/* Image strip */}
                 <div className="w-full h-64 md:h-80 overflow-hidden">
                   <img
                     src="/bluehour.png"
@@ -192,8 +153,6 @@ export default function Page() {
                     className="w-full h-full object-cover object-top group-hover:scale-[1.02] group-hover:brightness-110 transition-all duration-700"
                   />
                 </div>
-
-                {/* Case study content */}
                 <div className="p-8 lg:p-12 grid grid-cols-1 lg:grid-cols-2 gap-10">
                   {/* Left */}
                   <div className="space-y-5">
@@ -203,7 +162,6 @@ export default function Page() {
                       <p className="text-gray-300 leading-relaxed">
                         Fullscreen ambient focus app designed to live on a second monitor — six curated live scenes with canvas-rendered particle effects, optional looping audio, and a minimal timer overlay with session history.
                       </p>
-                      {/* Impact line */}
                       <p className="mt-3 text-sm text-gray-500 italic">
                         Second-monitor workflow · Sub-second scene loading · Zero-friction start · Immersion without interruption
                       </p>
@@ -237,7 +195,6 @@ export default function Page() {
                       </Link>
                     </div>
                   </div>
-
                   {/* Right — case study */}
                   <div className="space-y-6">
                     <div>
@@ -270,14 +227,13 @@ export default function Page() {
             </div>
           </BlurFade>
 
-          {/* ── Remaining projects — 2-col grid ── */}
+          {/* ── 2 supporting projects ── */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {restProjects.map((project, id) => {
+            {featuredProjects.map((project, id) => {
               const details = PROJECT_DETAILS[project.title];
               return (
                 <BlurFade key={project.title} delay={BLUR_FADE_DELAY * 5 + id * 0.1}>
                   <div className="group relative h-full hover:scale-[1.015] transition-transform duration-300">
-                    {/* Hover glow — subtler than before */}
                     <div className="absolute inset-0 bg-gradient-to-br from-white/[0.04] to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm pointer-events-none" />
                     <ProjectCard
                       href={project.href}
@@ -299,50 +255,25 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ── About ─────────────────────────────────────────── */}
-      <section id="about" className="py-20 px-6 relative z-10 border-t border-white/[0.04]">
-        <div className="max-w-5xl mx-auto">
-          <BlurFade delay={BLUR_FADE_DELAY * 8}>
-            <div className="text-center mb-14">
-              <h2 className="text-5xl sm:text-6xl font-bold tracking-tight text-white mb-4">
-                About Me
-              </h2>
-            </div>
-          </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 9}>
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-10 lg:p-14 shadow-2xl">
-              <Markdown
-                className="prose prose-lg max-w-none text-white dark:prose-invert prose-headings:text-white prose-p:text-gray-300 prose-a:text-white prose-a:no-underline hover:prose-a:text-gray-200 prose-strong:text-white prose-li:text-gray-300"
-                components={{ a: CustomLink }}
-              >
-                {DATA.summary}
-              </Markdown>
-            </div>
-          </BlurFade>
-        </div>
-      </section>
-
       {/* ── Experience ────────────────────────────────────── */}
-      <section id="work" className="py-20 px-6 relative z-10">
+      <section id="work" className="py-14 px-6 relative z-10 border-t border-white/[0.04]">
         <div className="max-w-6xl mx-auto">
-          <BlurFade delay={BLUR_FADE_DELAY * 10}>
-            <div className="text-center mb-14">
-              <h2 className="text-5xl sm:text-6xl font-bold tracking-tight text-white mb-4">
-                Experience
+          <BlurFade delay={BLUR_FADE_DELAY * 8}>
+            <div className="mb-10">
+              <span className="text-[11px] font-semibold tracking-widest text-gray-500 uppercase">Experience</span>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mt-2">
+                Where I've Shipped
               </h2>
-              <p className="text-lg text-gray-400 max-w-xl mx-auto">
-                Where I've shipped real work alongside real teams
-              </p>
             </div>
           </BlurFade>
 
-          {/* Primary roles — full cards */}
-          <div className="space-y-6">
+          {/* Two primary roles */}
+          <div className="space-y-4">
             {primaryWork.map((work, id) => (
-              <BlurFade key={work.company} delay={BLUR_FADE_DELAY * 11 + id * 0.08}>
+              <BlurFade key={work.company} delay={BLUR_FADE_DELAY * 9 + id * 0.08}>
                 <div className="group relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-white/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm" />
-                  <div className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 shadow-2xl hover:shadow-white/10 transition-all duration-300 hover:scale-[1.02]">
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-white/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm" />
+                  <div className="relative bg-white/[0.04] backdrop-blur-md border border-white/[0.08] rounded-2xl p-6 hover:shadow-white/5 transition-all duration-300 hover:scale-[1.01]">
                     <ResumeCard
                       key={work.company}
                       logoUrl={work.logoUrl}
@@ -362,26 +293,24 @@ export default function Page() {
             ))}
           </div>
 
-          {/* Additional experience — visually de-emphasized */}
-          <BlurFade delay={BLUR_FADE_DELAY * 14}>
-            <div className="mt-10">
-              <p className="text-xs font-semibold tracking-widest text-gray-500 uppercase mb-5 ml-1">
-                Additional Experience
+          {/* Additional — compact list */}
+          <BlurFade delay={BLUR_FADE_DELAY * 11}>
+            <div className="mt-6">
+              <p className="text-[10px] font-semibold tracking-widest text-gray-600 uppercase mb-4 ml-1">
+                Additional
               </p>
-              <div className="divide-y divide-white/5 border border-white/10 rounded-2xl overflow-hidden">
+              <div className="divide-y divide-white/[0.04] border border-white/[0.07] rounded-xl overflow-hidden">
                 {additionalWork.map((work) => (
-                  <div key={work.company} className="flex items-center justify-between px-6 py-4 hover:bg-white/5 transition-colors duration-200">
-                    <div className="flex items-center gap-4">
+                  <div key={work.company} className="flex items-center justify-between px-5 py-3.5 hover:bg-white/[0.03] transition-colors duration-200">
+                    <div className="flex items-center gap-3">
                       {work.logoUrl && (
-                        <img src={work.logoUrl} alt={work.company} className="w-6 h-6 rounded-full object-cover opacity-60" />
+                        <img src={work.logoUrl} alt={work.company} className="w-5 h-5 rounded-full object-cover opacity-50" />
                       )}
-                      <div>
-                        <span className="text-sm font-medium text-gray-300">{work.company}</span>
-                        <span className="text-gray-600 mx-2">·</span>
-                        <span className="text-sm text-gray-500">{work.title}</span>
-                      </div>
+                      <span className="text-sm text-gray-400">{work.company}</span>
+                      <span className="text-gray-700">·</span>
+                      <span className="text-sm text-gray-600">{work.title}</span>
                     </div>
-                    <span className="text-xs text-gray-600 shrink-0 ml-4">
+                    <span className="text-xs text-gray-700 shrink-0 ml-4">
                       {work.start} – {work.end ?? "Present"}
                     </span>
                   </div>
@@ -393,19 +322,17 @@ export default function Page() {
       </section>
 
       {/* ── How I Think ───────────────────────────────────── */}
-      <section id="thinking" className="py-20 px-6 relative z-10 border-t border-white/[0.04]">
+      <section id="thinking" className="py-14 px-6 relative z-10 border-t border-white/[0.04]">
         <div className="max-w-6xl mx-auto">
-          <BlurFade delay={BLUR_FADE_DELAY * 15}>
-            <div className="text-center mb-14">
-              <h2 className="text-5xl sm:text-6xl font-bold tracking-tight text-white mb-4">
-                How I Think
+          <BlurFade delay={BLUR_FADE_DELAY * 12}>
+            <div className="mb-10">
+              <span className="text-[11px] font-semibold tracking-widest text-gray-500 uppercase">Thinking</span>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mt-2">
+                How I Make Decisions
               </h2>
-              <p className="text-lg text-gray-400 max-w-xl mx-auto">
-                The principles that shape what I build and how I make decisions
-              </p>
             </div>
           </BlurFade>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {[
               {
                 label: "01",
@@ -428,14 +355,11 @@ export default function Page() {
                 body: "The measure of a feature is whether someone uses it — not whether it was technically interesting to build. I stay user-anchored.",
               },
             ].map((principle, id) => (
-              <BlurFade key={principle.label} delay={BLUR_FADE_DELAY * 16 + id * 0.08}>
-                <div className="group relative h-full">
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-white/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm" />
-                  <div className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 shadow-xl hover:shadow-white/10 transition-all duration-300 hover:scale-[1.02] h-full">
-                    <span className="text-xs font-semibold tracking-widest text-gray-500 uppercase">{principle.label}</span>
-                    <h3 className="text-lg font-semibold text-white mt-3 mb-3 leading-snug">{principle.title}</h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">{principle.body}</p>
-                  </div>
+              <BlurFade key={principle.label} delay={BLUR_FADE_DELAY * 13 + id * 0.06}>
+                <div className="relative bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6 h-full hover:bg-white/[0.05] transition-colors duration-300">
+                  <span className="text-[10px] font-semibold tracking-widest text-gray-600 uppercase">{principle.label}</span>
+                  <h3 className="text-base font-semibold text-white mt-2.5 mb-2 leading-snug">{principle.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">{principle.body}</p>
                 </div>
               </BlurFade>
             ))}
@@ -443,49 +367,36 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ── Outside the screen ───────────────────────────── */}
-      {/* No heading — intentional. A pause, not a section. */}
-      <section className="py-16 px-6 relative z-10 border-t border-white/[0.04]">
+      {/* ── Outside the screen — ambient pause, no heading ── */}
+      <section className="py-12 px-6 relative z-10 border-t border-white/[0.04]">
         <div className="max-w-6xl mx-auto">
-          <BlurFade delay={BLUR_FADE_DELAY * 17}>
-            {/* Three cinematic photos — grayscale at rest, color on hover */}
-            <div className="grid grid-cols-3 gap-3 mb-10">
+          <BlurFade delay={BLUR_FADE_DELAY * 15}>
+            <div className="grid grid-cols-3 gap-3 mb-8">
               {[
-                { src: "/pic6.jpg", alt: "Mossy forest trail", pos: "object-center" },
-                { src: "/pic3.jpg", alt: "Snow cabin through doorframe", pos: "object-center" },
-                { src: "/pic2.jpg", alt: "Forest walk, sun through pines", pos: "object-center" },
+                { src: "/pic6.jpg", alt: "Mossy forest trail" },
+                { src: "/pic3.jpg", alt: "Snow cabin through doorframe" },
+                { src: "/pic2.jpg", alt: "Forest walk, sun through pines" },
               ].map((photo) => (
-                <div
-                  key={photo.src}
-                  className="overflow-hidden rounded-xl aspect-[3/2] bg-white/[0.02]"
-                >
+                <div key={photo.src} className="overflow-hidden rounded-xl aspect-[3/2] bg-white/[0.02]">
                   <img
                     src={photo.src}
                     alt={photo.alt}
-                    className={`w-full h-full object-cover ${photo.pos} grayscale opacity-60 hover:grayscale-0 hover:opacity-90 transition-all duration-700 ease-in-out`}
+                    className="w-full h-full object-cover grayscale opacity-60 hover:grayscale-0 hover:opacity-90 transition-all duration-700 ease-in-out"
                   />
                 </div>
               ))}
             </div>
-
-            {/* Typographic "currently" — three quiet data points */}
-            <div className="flex flex-col sm:flex-row gap-6 sm:gap-12">
+            <div className="flex flex-col sm:flex-row gap-5 sm:gap-10">
               <div>
-                <span className="text-[10px] font-semibold tracking-widest text-gray-600 uppercase block mb-1">
-                  Listening to
-                </span>
+                <span className="text-[10px] font-semibold tracking-widest text-gray-600 uppercase block mb-1">Listening to</span>
                 <p className="text-sm text-gray-400">Nils Frahm · Jon Hopkins · Bill Evans</p>
               </div>
               <div>
-                <span className="text-[10px] font-semibold tracking-widest text-gray-600 uppercase block mb-1">
-                  Outside work
-                </span>
+                <span className="text-[10px] font-semibold tracking-widest text-gray-600 uppercase block mb-1">Outside work</span>
                 <p className="text-sm text-gray-400">badminton · cooking · hiking</p>
               </div>
               <div>
-                <span className="text-[10px] font-semibold tracking-widest text-gray-600 uppercase block mb-1">
-                  Typing speed
-                </span>
+                <span className="text-[10px] font-semibold tracking-widest text-gray-600 uppercase block mb-1">Typing speed</span>
                 <p className="text-sm text-gray-400">210 wpm · 100% accuracy</p>
               </div>
             </div>
@@ -494,23 +405,21 @@ export default function Page() {
       </section>
 
       {/* ── Stack ─────────────────────────────────────────── */}
-      <section id="skills" className="py-20 px-6 relative z-10 border-t border-white/[0.04]">
+      <section id="skills" className="py-14 px-6 relative z-10 border-t border-white/[0.04]">
         <div className="max-w-5xl mx-auto">
-          <BlurFade delay={BLUR_FADE_DELAY * 18}>
-            <div className="text-center mb-14">
-              <h2 className="text-5xl sm:text-6xl font-bold tracking-tight text-white mb-4">
-                Stack
+          <BlurFade delay={BLUR_FADE_DELAY * 16}>
+            <div className="mb-10">
+              <span className="text-[11px] font-semibold tracking-widest text-gray-500 uppercase">Stack</span>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mt-2">
+                Tools I Trust
               </h2>
-              <p className="text-lg text-gray-400 max-w-xl mx-auto">
-                Tools I know deeply enough to make tradeoffs with confidence
-              </p>
             </div>
           </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 19}>
-            <div className="space-y-6">
+          <BlurFade delay={BLUR_FADE_DELAY * 17}>
+            <div className="space-y-5">
               {SKILL_GROUPS.map((group) => (
-                <div key={group.label} className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-                  <span className="text-xs font-semibold tracking-widest text-gray-500 uppercase w-36 shrink-0">
+                <div key={group.label} className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+                  <span className="text-[10px] font-semibold tracking-widest text-gray-600 uppercase w-32 shrink-0">
                     {group.label}
                   </span>
                   <div className="flex flex-wrap gap-2">
@@ -518,7 +427,7 @@ export default function Page() {
                       <Badge
                         key={skill}
                         variant="outline"
-                        className="text-white border-white/20 bg-white/5 px-4 py-2 text-sm font-medium hover:bg-white/10 hover:border-white/40 transition-all duration-200"
+                        className="text-gray-300 border-white/[0.12] bg-white/[0.04] px-3 py-1.5 text-xs font-medium hover:bg-white/[0.08] hover:border-white/20 transition-all duration-200"
                       >
                         {skill}
                       </Badge>
@@ -531,75 +440,40 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ── Hackathons ────────────────────────────────────── */}
-      <section id="hackathons" className="py-20 px-6 relative z-10 border-t border-white/[0.04]">
-        <div className="max-w-6xl mx-auto">
-          <BlurFade delay={BLUR_FADE_DELAY * 20}>
-            <div className="text-center mb-14">
-              <div className="inline-block rounded-full bg-white/10 border border-white/20 px-5 py-2 text-sm text-white mb-6 backdrop-blur-sm">
-                Hackathons
-              </div>
-              <h2 className="text-5xl sm:text-6xl font-bold tracking-tight text-white mb-4">
-                Built Under Pressure
-              </h2>
-              <p className="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                Constraints sharpen judgment. These are the things I shipped in 24–48 hours with teams I'd just met.
-              </p>
-            </div>
-          </BlurFade>
-          <div className="space-y-6">
-            {DATA.hackathons.map((project, id) => (
-              <BlurFade key={project.title + project.dates} delay={BLUR_FADE_DELAY * 21 + id * 0.1}>
-                <div className="group relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-white/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm" />
-                  <div className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 shadow-2xl hover:shadow-white/10 transition-all duration-300 hover:scale-[1.02]">
-                    <HackathonCard
-                      title={project.title}
-                      description={project.description}
-                      location={project.location}
-                      dates={project.dates}
-                      image={project.image}
-                      links={project.links}
-                    />
-                  </div>
-                </div>
-              </BlurFade>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── Contact ───────────────────────────────────────── */}
-      <section id="contact" className="py-20 px-6 relative z-10 border-t border-white/[0.04]">
+      <section id="contact" className="py-14 px-6 relative z-10 border-t border-white/[0.04]">
         <div className="max-w-5xl mx-auto text-center">
-          <BlurFade delay={BLUR_FADE_DELAY * 22}>
-            <div className="space-y-8">
-              <h2 className="text-5xl sm:text-6xl font-bold tracking-tight text-white">
-                Let's Talk
-              </h2>
-              <p className="text-lg text-gray-400 max-w-xl mx-auto leading-relaxed">
-                I'm looking for my next internship or full-time role — somewhere I can ship at the intersection of engineering, product, and design.
+          <BlurFade delay={BLUR_FADE_DELAY * 18}>
+            <div className="space-y-7">
+              <div>
+                <span className="text-[11px] font-semibold tracking-widest text-gray-500 uppercase">Contact</span>
+                <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mt-2">
+                  Let's Talk
+                </h2>
+              </div>
+              <p className="text-base text-gray-400 max-w-lg mx-auto leading-relaxed">
+                Looking for my next role — somewhere I can ship at the intersection of engineering, product, and design.
               </p>
-              <div className="flex flex-col sm:flex-row gap-5 justify-center items-center pt-6">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-2">
                 <Link
                   href={DATA.contact.social.LinkedIn.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 px-10 py-5 bg-white text-black rounded-2xl font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-2xl hover:shadow-white/20 min-w-[200px]"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-xl hover:shadow-white/20 min-w-[180px]"
                 >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                   </svg>
-                  Connect on LinkedIn
+                  LinkedIn
                 </Link>
                 <Link
                   href={`mailto:${DATA.contact.email}`}
-                  className="inline-flex items-center gap-3 px-10 py-5 border-2 border-white/30 text-white rounded-2xl font-semibold hover:bg-white hover:text-black transition-all duration-300 hover:scale-105 backdrop-blur-sm min-w-[200px]"
+                  className="inline-flex items-center gap-3 px-8 py-4 border border-white/20 text-white rounded-xl font-semibold hover:bg-white hover:text-black transition-all duration-300 hover:scale-105 min-w-[180px]"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
-                  Send Email
+                  Email
                 </Link>
               </div>
             </div>
@@ -608,31 +482,30 @@ export default function Page() {
       </section>
 
       {/* ── Footer ────────────────────────────────────────── */}
-      <footer className="py-12 px-6 bg-background border-t border-border/20">
-        <div className="max-w-4xl mx-auto flex flex-col items-center gap-8">
-          {/* Philosophy line */}
-          <p className="text-sm text-gray-600 italic text-center">
+      <footer className="py-8 px-6 bg-background border-t border-border/20">
+        <div className="max-w-4xl mx-auto flex flex-col items-center gap-5">
+          <p className="text-xs text-gray-700 italic">
             Software should reduce friction between intent and action.
           </p>
-          <div className="flex flex-col items-center space-y-4">
-            <Link href={`mailto:${DATA.contact.email}`} className="text-lg font-medium hover:opacity-70 transition-opacity">
-              Email
-            </Link>
-            <Link href="/JoshuaHsiehResume.pdf" target="_blank" rel="noopener noreferrer" className="text-lg font-medium hover:opacity-70 transition-opacity">
-              Resume
-            </Link>
-            <Link href={DATA.contact.social.LinkedIn.url} target="_blank" rel="noopener noreferrer" className="text-lg font-medium hover:opacity-70 transition-opacity">
-              LinkedIn
-            </Link>
-            <Link href={DATA.contact.social.GitHub.url} target="_blank" rel="noopener noreferrer" className="text-lg font-medium hover:opacity-70 transition-opacity">
-              GitHub
-            </Link>
-            <Link href="https://dev.to/josh_hsiehh" target="_blank" rel="noopener noreferrer" className="text-lg font-medium hover:opacity-70 transition-opacity">
-              Blog
-            </Link>
-            <Link href="https://www.youtube.com/@Joshua-wg5lt" target="_blank" rel="noopener noreferrer" className="text-lg font-medium hover:opacity-70 transition-opacity">
-              YouTube
-            </Link>
+          <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
+            {[
+              { label: "Email", href: `mailto:${DATA.contact.email}` },
+              { label: "Resume", href: "/JoshuaHsiehResume.pdf", external: true },
+              { label: "LinkedIn", href: DATA.contact.social.LinkedIn.url, external: true },
+              { label: "GitHub", href: DATA.contact.social.GitHub.url, external: true },
+              { label: "Blog", href: "https://dev.to/josh_hsiehh", external: true },
+              { label: "YouTube", href: "https://www.youtube.com/@Joshua-wg5lt", external: true },
+            ].map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noopener noreferrer" : undefined}
+                className="text-sm text-gray-500 hover:text-white transition-colors duration-200"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </footer>
