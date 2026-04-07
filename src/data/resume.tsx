@@ -103,7 +103,7 @@ export const DATA = {
       title: "Salesforce Developer Intern",
       logoUrl: "/deltadental.png",
       start: "June 2025",
-      end: "April 2025",
+      end: "April 2026",
       description:
         "Built a Salesforce case hierarchy view component to streamline complex case management for support teams. Developed an AI-powered email assistant using Apex and Lightning Web Components (LWC) to accelerate response workflows for dental insurance operations.",
     },
