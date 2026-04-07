@@ -101,7 +101,7 @@ export default function Page() {
         <div className="max-w-4xl mx-auto text-center">
           <BlurFade delay={BLUR_FADE_DELAY}>
             <div className="space-y-6">
-              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-tight">
+              <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-tight">
                 Hi, I'm{" "}
                 <span className="bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
                   {DATA.name}
@@ -173,7 +173,7 @@ export default function Page() {
                         </Badge>
                       ))}
                     </div>
-                    <div className="flex gap-3">
+                    <div className="flex flex-wrap gap-3">
                       <Link
                         href="https://bluehourfocus.vercel.app/"
                         target="_blank"
@@ -271,16 +271,16 @@ export default function Page() {
           <BlurFade delay={BLUR_FADE_DELAY * 10}>
             <div className="mt-2 divide-y divide-white/[0.04]">
               {additionalWork.map((work) => (
-                <div key={work.company} className="flex items-center justify-between py-3">
-                  <div className="flex items-center gap-3">
+                <div key={work.company} className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 gap-0.5 sm:gap-0">
+                  <div className="flex items-center gap-2 flex-wrap">
                     {work.logoUrl && (
-                      <img src={work.logoUrl} alt={work.company} className="w-4 h-4 rounded-full object-cover opacity-40" />
+                      <img src={work.logoUrl} alt={work.company} className="w-4 h-4 rounded-full object-cover opacity-40 shrink-0" />
                     )}
                     <span className="text-sm text-gray-500">{work.company}</span>
-                    <span className="text-gray-700 text-xs">·</span>
+                    <span className="text-gray-700 text-xs shrink-0">·</span>
                     <span className="text-sm text-gray-600">{work.title}</span>
                   </div>
-                  <span className="text-xs text-gray-700 shrink-0">{work.start} – {work.end ?? "Present"}</span>
+                  <span className="text-xs text-gray-700 shrink-0 sm:ml-4">{work.start} – {work.end ?? "Present"}</span>
                 </div>
               ))}
             </div>
