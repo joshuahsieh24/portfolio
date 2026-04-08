@@ -60,7 +60,7 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <TooltipProvider delayDuration={0}>
             {children}
           </TooltipProvider>
