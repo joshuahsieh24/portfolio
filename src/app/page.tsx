@@ -13,7 +13,7 @@ const BLUR_FADE_DELAY = 0.04;
 
 const PROJECT_DETAILS: Record<string, { impact: string; depth: ProjectDepth }> = {
   FinanceAI: {
-    impact: "Surfaces the highest-confidence anomalies first — cutting analyst triage time by reducing noise before a human ever opens a dashboard.",
+    impact: "Puts the highest-risk transactions at the top — less noise to sort through before anything needs human attention.",
     depth: {
       label: "Architecture & tradeoffs",
       sections: [
@@ -23,23 +23,23 @@ const PROJECT_DETAILS: Record<string, { impact: string; depth: ProjectDepth }> =
         },
         {
           title: "Key tradeoff",
-          body: "Chose unsupervised anomaly detection over supervised classification — no labeled fraud dataset was available, and the model needed to generalize across transaction types without periodic retraining.",
+          body: "Went with unsupervised anomaly detection instead of supervised classification — no labeled fraud dataset existed, and the model needed to generalize across transaction types without constant retraining.",
         },
       ],
     },
   },
   "R.E.R.S": {
-    impact: "Eliminates manual handoff steps between dispatch and first responders — incident awareness from call intake to scene arrival in one continuous view.",
+    impact: "Fewer manual handoffs between dispatch and first responders — one continuous view from call intake to scene arrival.",
     depth: {
       label: "Architecture & tradeoffs",
       sections: [
         {
           title: "Architecture",
-          body: "Next.js with role-based views (dispatcher vs. paramedic). FastAPI backend + PostgreSQL for incident state. Mapbox GL for real-time GPS overlays. WebSocket connections maintain live incident feeds without polling.",
+          body: "Next.js with role-based views (dispatcher vs. paramedic). FastAPI backend + PostgreSQL for incident state. Mapbox GL for real-time GPS overlays. WebSocket connections keep incident feeds live without polling.",
         },
         {
           title: "Key tradeoff",
-          body: "Used Mapbox over Google Maps for composable, fast-rendering incident overlays — the visual control was necessary for layering GPS pins, incident zones, and responder paths without performance degradation.",
+          body: "Chose Mapbox over Google Maps for the composability — layering GPS pins, incident zones, and responder paths cleanly required more rendering control than Google's API allowed.",
         },
       ],
     },
@@ -56,28 +56,28 @@ const SKILL_GROUPS = [
 const PRINCIPLES = [
   {
     n: "01",
-    title: "Design is a constraint, not decoration",
-    body: "Good design reduces cognitive load and earns trust before a user reads a single word. I treat aesthetic decisions as product decisions.",
+    title: "Design shapes how people understand things",
+    body: "The way something looks changes how quickly people trust it and make sense of it. I think about visual decisions the same way I think about technical ones.",
   },
   {
     n: "02",
-    title: "Ship to learn, then polish to ship",
-    body: "Velocity exposes what actually matters. I build fast in discovery and hold a high bar before anything goes in front of people.",
+    title: "Build fast to learn. Slow down before you ship.",
+    body: "Moving quickly early on shows what actually matters. Once I know what's worth keeping, I hold a higher bar before it goes in front of anyone.",
   },
   {
     n: "03",
     title: "Real depth shows in how you handle failure",
-    body: "Edge cases, error states, and degraded experiences reveal whether something was engineered or just assembled. I think about what breaks.",
+    body: "Error states and edge cases reveal whether something was carefully built or just thrown together. I try to think through what breaks before it does.",
   },
   {
     n: "04",
-    title: "Performance is product quality",
-    body: "A missed animation frame, a blocking query, a page that loads slowly — users don't read error messages, but they feel every stall. I treat render budgets, load behavior, and data access patterns as product decisions. Speed and stability aren't optimizations; they're what make software feel trustworthy.",
+    title: "Performance is part of the product",
+    body: "A slow page, a janky animation, a blocking query — users don't read error logs, but they feel every stall. I treat performance like a feature, not something to fix later.",
   },
   {
     n: "05",
-    title: "Products are for people, not portfolios",
-    body: "The measure of a feature is whether someone uses it — not whether it was technically interesting to build. I stay user-anchored.",
+    title: "The test of a feature is whether someone uses it",
+    body: "Not whether it was clever to build, or impressive in a demo. I try to stay honest about that distinction.",
   },
 ];
 
@@ -108,17 +108,17 @@ export default function Page() {
                 </span>
               </h1>
               <p className="text-xl lg:text-2xl text-gray-300 leading-relaxed max-w-2xl mx-auto">
-                I build software with{" "}
-                <span className="text-white font-medium">engineering depth</span>,{" "}
-                <span className="text-white font-medium">product instinct</span>, and{" "}
-                <span className="text-white font-medium">design taste</span>.
+                I build software that's{" "}
+                <span className="text-white font-medium">well-engineered</span>,{" "}
+                <span className="text-white font-medium">product-aware</span>, and{" "}
+                <span className="text-white font-medium">worth using</span>.
               </p>
               <div className="flex items-center justify-center gap-2.5 text-sm text-gray-500">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-400/80 animate-pulse shrink-0" />
                 <span>
                   Currently building{" "}
                   <span className="text-gray-400">Bluehour</span>
-                  {" "}— a second-monitor focus environment exploring calm UX, scene rendering, and ambient sound design.
+                  {" "}— a calm ambient focus app designed to live on a second monitor.
                 </span>
               </div>
               <div className="pt-2">
@@ -157,13 +157,13 @@ export default function Page() {
                 <div className="p-8 lg:p-12 grid grid-cols-1 lg:grid-cols-2 gap-10">
                   <div className="space-y-5">
                     <div>
-                      <span className="text-[10px] font-semibold tracking-widest text-gray-500 uppercase">Centerpiece Project</span>
+                      <span className="text-[10px] font-semibold tracking-widest text-gray-500 uppercase">Featured Project</span>
                       <h3 className="text-3xl font-bold text-white mt-2 mb-3">Bluehour</h3>
                       <p className="text-gray-300 leading-relaxed text-sm">
-                        Fullscreen ambient focus app designed to live on a second monitor — six curated live scenes with canvas-rendered particle effects, optional looping audio, and a minimal timer overlay with session history.
+                        Fullscreen ambient focus app for a second monitor — six live scenes with canvas-rendered particle effects, optional looping audio, and a minimal timer with session history.
                       </p>
                       <p className="mt-3 text-xs text-gray-600 italic">
-                        Second-monitor workflow · Sub-second scene loading · Zero-friction start
+                        Second-monitor focus · Fast scene loading · No account needed
                       </p>
                     </div>
                     <div className="flex flex-wrap gap-1.5">
@@ -197,10 +197,10 @@ export default function Page() {
                   </div>
                   <div className="space-y-5">
                     {[
-                      { label: "Why I Built It", body: "Existing focus tools are cluttered, notification-heavy, or ugly. I wanted something that respects your attention the way a well-designed physical object does — present, calm, and frictionless to use." },
-                      { label: "Key Product Decisions", body: "No accounts required. No distracting dashboards. The app opens into a scene immediately — the mental model is closer to a lamp you turn on than a product you log into." },
-                      { label: "Technical Architecture", body: "Canvas-rendered particle systems (rain, haze, dust) via requestAnimationFrame loops. Howler.js for seamless audio looping. A pre-session → active ↔ paused → complete state machine drives all timer logic." },
-                      { label: "What I Optimized For", body: "Sub-second load, zero-friction first use, and a visual quality bar closer to a native app than a side project — because the aesthetic is inseparable from the product promise." },
+                      { label: "Why I Built It", body: "Most focus tools are either too busy or too bare. I wanted something you could put on a second monitor that looked good and stayed out of the way." },
+                      { label: "Key Product Decisions", body: "No accounts, no onboarding. You open it and you're in a scene. It's closer to turning on a lamp than logging into a product." },
+                      { label: "Technical Architecture", body: "Canvas particle systems (rain, haze, dust) via requestAnimationFrame loops. Howler.js for seamless audio looping. Timer state runs through a pre-session → active ↔ paused → complete machine." },
+                      { label: "What I Optimized For", body: "Sub-second load, no friction on first open, and a visual quality that doesn't feel like a weekend project. The look is part of how it works." },
                     ].map((item) => (
                       <div key={item.label}>
                         <h4 className="text-[10px] font-semibold tracking-widest text-gray-500 uppercase mb-1.5">{item.label}</h4>
@@ -377,7 +377,7 @@ export default function Page() {
             <div className="space-y-6">
               <h2 className="text-3xl font-bold tracking-tight text-white">Let's Talk</h2>
               <p className="text-sm text-gray-500 max-w-md mx-auto leading-relaxed">
-                Looking for my next role — somewhere I can ship at the intersection of engineering, product, and design.
+                Looking for my next role — somewhere engineering quality, product thinking, and design all show up in the same room.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center items-center pt-1">
                 <Link
@@ -410,7 +410,7 @@ export default function Page() {
       <footer className="py-8 px-6 border-t border-white/[0.04]">
         <div className="max-w-5xl mx-auto flex flex-col items-center gap-5">
           <p className="text-xs text-gray-700 italic">
-            Software should reduce friction between intent and action.
+            Good software gets out of the way.
           </p>
           <div className="flex flex-wrap justify-center gap-6">
             {[
