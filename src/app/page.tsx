@@ -11,7 +11,54 @@ import Navbar from "@/components/navbar";
 
 const BLUR_FADE_DELAY = 0.04;
 
+// Loose type so literal-string fields in `as const` don't narrow conditionals to `never`
+type AnyProject = {
+  title: string;
+  href: string;
+  target: string;
+  rel: string;
+  dates: string;
+  active: boolean;
+  description: string;
+  technologies: readonly string[];
+  links: ReadonlyArray<{ type: string; href: string; icon: undefined }>;
+  image: string;
+  video: string | undefined;
+};
+
 const PROJECT_DETAILS: Record<string, { impact: string; depth: ProjectDepth }> = {
+  TrustGraph: {
+    impact: "Turns raw session telemetry into ranked, explainable risk decisions — so analysts focus on real threats rather than borderline noise.",
+    depth: {
+      label: "Architecture & tradeoffs",
+      sections: [
+        {
+          title: "Architecture",
+          body: "Hybrid scorer: 0.5 × Isolation Forest + 0.5 × domain rule weights (impossible travel 0.30, privilege jump 0.15, sensitivity mismatch 0.20). Risk propagates through a session graph via path traversal with per-hop decay — modeling how a compromise leaks to adjacent users, devices, and apps. KMeans on 11 user-level features produces named trust segments; Euclidean drift between 14-day and 30-day behavioral windows flags early compromise indicators.",
+        },
+        {
+          title: "Key tradeoff",
+          body: "Hybrid model over pure ML: rules provide deterministic recall on known attack patterns; Isolation Forest suppresses noise on borderline sessions without labeled data or per-deployment retraining. A counterfactual simulation endpoint lets analysts hypothetically change session attributes and recompute risk scores — quantifying policy impact before any action is taken.",
+        },
+      ],
+    },
+  },
+  Still: {
+    impact: "Turns a log of watched films into a living record of taste — one that resurfaces entries when they're most likely to mean something.",
+    depth: {
+      label: "Architecture & tradeoffs",
+      sections: [
+        {
+          title: "Architecture",
+          body: "384-dim sentence embeddings (all-MiniLM-L6-v2) stored in pgvector concatenate user reflection text with TMDb film metadata per entry. Four independent resurfacing strategies run on each access: anniversary (same calendar week in prior years), seasonal, semantic echo (cosine > 0.65 against recent entries), and forgotten (meaningful entries unsurfaced for 6+ months). Theme scoring runs against 12 anchored concept vectors — longing, grief, tenderness, and others.",
+        },
+        {
+          title: "Key tradeoff",
+          body: "Used 12 manually anchored theme vectors instead of unsupervised topic modeling — anchors produce consistent, human-readable categories without per-user retraining. K-means k selection uses silhouette score auto-selection to keep personal clustering adaptive. The resurfacing system has no user-facing settings: strategies surface entries without friction or configuration.",
+        },
+      ],
+    },
+  },
   FinanceAI: {
     impact: "Puts the highest-risk transactions at the top — less noise to sort through before anything needs human attention.",
     depth: {
@@ -50,7 +97,7 @@ const SKILL_GROUPS = [
   { label: "Product Layer",  skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "React Native"] },
   { label: "Backend & Data", skills: ["Node.js", "Python", "FastAPI", "PostgreSQL", "Supabase", "Prisma"] },
   { label: "Infrastructure", skills: ["Docker", "AWS", "Firebase", "Git", "REST APIs"] },
-  { label: "Languages",      skills: ["Java", "C++"] },
+  { label: "Languages",      skills: ["Kotlin", "Java", "C++"] },
 ];
 
 const PRINCIPLES = [
@@ -87,8 +134,10 @@ export default function Page() {
     if (element) element.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const [bluehour, ...allRest] = DATA.projects;
-  const featuredProjects = allRest.slice(0, 2);
+  const allProjects = DATA.projects as readonly AnyProject[];
+  const [bluehour, ...allRest] = allProjects;
+  const featuredProjects = allRest.slice(0, 4);   // 2×2 grid
+  const additionalProjects = allRest.slice(4);     // compact list
   const primaryWork = DATA.work.slice(0, 2);
   const additionalWork = DATA.work.slice(2);
 
@@ -213,14 +262,14 @@ export default function Page() {
             </div>
           </BlurFade>
 
-          {/* Supporting projects — no glow wrapper, cards stand alone */}
+          {/* Supporting projects — 2×2 grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
             {featuredProjects.map((project, id) => {
               const details = PROJECT_DETAILS[project.title];
               return (
                 <BlurFade key={project.title} delay={BLUR_FADE_DELAY * 4 + id * 0.1}>
                   <ProjectCard
-                    href={project.href}
+                    href={project.href || undefined}
                     title={project.title}
                     description={project.description}
                     dates={project.dates}
@@ -235,6 +284,40 @@ export default function Page() {
               );
             })}
           </div>
+
+          {/* Additional projects — compact list */}
+          {additionalProjects.length > 0 && (
+            <BlurFade delay={BLUR_FADE_DELAY * 8}>
+              <div className="mt-6 pt-5 border-t border-white/[0.04] divide-y divide-white/[0.04]">
+                {additionalProjects.map((project) => (
+                  <div
+                    key={project.title}
+                    className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between py-3 gap-0.5 sm:gap-0"
+                  >
+                    <div className="flex flex-wrap items-baseline gap-x-2 min-w-0">
+                      {project.href ? (
+                        <Link
+                          href={project.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-gray-500 hover:text-gray-300 transition-colors"
+                        >
+                          {project.title}
+                        </Link>
+                      ) : (
+                        <span className="text-sm text-gray-500">{project.title}</span>
+                      )}
+                      <span className="text-gray-700 text-xs shrink-0">·</span>
+                      <span className="text-xs text-gray-600 leading-relaxed">
+                        {project.description.split(".")[0]}.
+                      </span>
+                    </div>
+                    <span className="text-xs text-gray-700 shrink-0 sm:ml-4">{project.dates}</span>
+                  </div>
+                ))}
+              </div>
+            </BlurFade>
+          )}
         </div>
       </section>
 
