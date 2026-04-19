@@ -225,7 +225,7 @@ export const DATA = {
         "scikit-learn",
       ],
       links: [],
-      image: "",
+      image: "/trustgraph.png",
       video: undefined,
     },
     {
@@ -246,7 +246,7 @@ export const DATA = {
         "sentence-transformers",
       ],
       links: [],
-      image: "",
+      image: "/still.png",
       video: undefined,
     },
     {
@@ -302,7 +302,7 @@ export const DATA = {
         "WorkManager",
       ],
       links: [],
-      image: "",
+      image: "/postcard.png",
       video: undefined,
     },
     {
