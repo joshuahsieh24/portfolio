@@ -417,7 +417,7 @@ export default function Page() {
             </div>
             {/* One ambient line — no labeled blocks */}
             <p className="text-xs text-gray-600">
-              Nils Frahm · Jon Hopkins · Bill Evans &nbsp;—&nbsp; badminton, cooking, hiking &nbsp;—&nbsp; 210 wpm
+              badminton, cooking, hiking, 210 wpm &nbsp;—&nbsp; nature, basketball, movies
             </p>
           </BlurFade>
         </div>
