@@ -498,8 +498,7 @@ export default function Page() {
           <div className="flex flex-wrap justify-center gap-6">
             {[
               { label: "Email", href: `mailto:${DATA.contact.email}` },
-              { label: "Resume", href: "/JoshuaHsiehResume.pdf", external: true },
-              { label: "LinkedIn", href: DATA.contact.social.LinkedIn.url, external: true },
+{ label: "LinkedIn", href: DATA.contact.social.LinkedIn.url, external: true },
               { label: "GitHub", href: DATA.contact.social.GitHub.url, external: true },
               { label: "Blog", href: "https://dev.to/josh_hsiehh", external: true },
               { label: "YouTube", href: "https://www.youtube.com/@Joshua-wg5lt", external: true },

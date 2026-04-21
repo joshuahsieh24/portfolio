@@ -30,14 +30,6 @@ export default function Navbar() {
             </div>
             <div className="flex items-center gap-2 sm:gap-4">
               <Link
-                href="/JoshuaHsiehResume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs sm:text-sm font-medium text-foreground hover:text-primary transition-colors"
-              >
-                Resume
-              </Link>
-              <Link
                 href="#contact"
                 className="text-xs sm:text-sm font-medium text-foreground hover:text-primary transition-colors"
               >
