@@ -1,54 +1,36 @@
 import { getBlogPosts } from "@/data/blog";
-import { formatDate } from "@/lib/utils";
+import BlurFade from "@/components/magicui/blur-fade";
+import { JournalFeed } from "@/components/journal-feed";
 
 export const metadata = {
-  title: "Blog",
-  description: "My thoughts on software development, life, and more.",
+  title: "Journal",
+  description:
+    "A creative outlet — writing, notes, and photo dumps from what I'm building and living.",
 };
+
+const BLUR_FADE_DELAY = 0.04;
 
 export default function BlogPage() {
   const posts = getBlogPosts();
 
   return (
-    <div className="prose prose-neutral dark:prose-invert">
-      <h1 className="font-bold text-2xl mb-8 tracking-tighter">my blog posts</h1>
-      {posts.length === 0 ? (
-        <p className="text-muted-foreground">No blog posts yet. Check back soon!</p>
-      ) : (
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr>
-                <th className="text-left p-2">Title</th>
-                <th className="text-left p-2">Published</th>
-                <th className="text-left p-2">Summary</th>
-              </tr>
-            </thead>
-            <tbody>
-              {posts.map((post) => (
-                <tr key={post.url} className="border-t">
-                  <td className="p-2">
-                    <a
-                      href={post.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-neutral-900 dark:text-neutral-100 hover:text-neutral-600 dark:hover:text-neutral-400"
-                    >
-                      {post.title}
-                    </a>
-                  </td>
-                  <td className="p-2 text-sm text-neutral-600 dark:text-neutral-400">
-                    {formatDate(post.publishedAt)}
-                  </td>
-                  <td className="p-2 text-sm text-neutral-600 dark:text-neutral-400">
-                    {post.summary}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-    </div>
+    <section>
+      <BlurFade delay={BLUR_FADE_DELAY}>
+        <span className="text-[11px] font-semibold tracking-widest text-muted-foreground uppercase block mb-3">
+          Journal
+        </span>
+        <h1 className="text-4xl font-bold tracking-tight text-foreground mb-3">
+          A little of everything
+        </h1>
+        <p className="text-sm text-muted-foreground leading-relaxed max-w-lg">
+          Part notebook, part scrapbook. Writing on software and the things
+          I&apos;m building, plus photo dumps from life outside the screen.
+        </p>
+      </BlurFade>
+
+      <div className="mt-12">
+        <JournalFeed posts={posts} />
+      </div>
+    </section>
   );
 }

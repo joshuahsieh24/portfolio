@@ -251,7 +251,7 @@ export const DATA = {
     },
     {
       title: "FinanceAI",
-      href: "https://www.youtube.com/watch?v=VErtACNBZ7w",
+      href: "",
       target: "_blank",
       rel: "noopener noreferrer",
       dates: "July 2025",

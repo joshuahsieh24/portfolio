@@ -27,22 +27,22 @@ export function HackathonCard({
 }: Props) {
   return (
     <li className="relative ml-10 py-4 group">
-      <div className="absolute -left-16 top-2 flex items-center justify-center bg-white/10 rounded-full border-2 border-white/20 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-        <Avatar className="border-2 border-white/20 size-12 m-auto bg-secondary">
+      <div className="absolute -left-16 top-2 flex items-center justify-center bg-foreground/10 rounded-full border-2 border-foreground/20 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+        <Avatar className="border-2 border-foreground/20 size-12 m-auto bg-secondary">
           <AvatarImage src={image} alt={title} className="object-contain" />
-          <AvatarFallback className="bg-secondary text-white">{title[0]}</AvatarFallback>
+          <AvatarFallback className="bg-secondary text-secondary-foreground">{title[0]}</AvatarFallback>
         </Avatar>
       </div>
       <div className="flex flex-1 flex-col justify-start gap-1">
         {dates && (
-          <time className="text-xs text-gray-300">{dates}</time>
+          <time className="text-xs text-muted-foreground">{dates}</time>
         )}
-        <h2 className="font-semibold leading-none text-white group-hover:text-gray-200 transition-colors duration-200">{title}</h2>
+        <h2 className="font-semibold leading-none text-foreground group-hover:text-primary transition-colors duration-200">{title}</h2>
         {location && (
-          <p className="text-sm text-gray-300">{location}</p>
+          <p className="text-sm text-muted-foreground">{location}</p>
         )}
         {description && (
-          <span className="prose dark:prose-invert text-sm text-gray-300 prose-headings:text-white prose-a:text-white">
+          <span className="prose dark:prose-invert text-sm text-muted-foreground prose-headings:text-foreground prose-a:text-foreground">
             {description}
           </span>
         )}
@@ -50,13 +50,13 @@ export function HackathonCard({
       {links && links.length > 0 && (
         <div className="mt-2 flex flex-row flex-wrap items-start gap-2">
           {links?.map((link, idx) => (
-            <Link 
-              href={link.href} 
+            <Link
+              href={link.href}
               key={idx}
               target={link.target || "_blank"}
               rel={link.rel || "noopener noreferrer"}
             >
-              <Badge key={idx} title={link.title} className="flex gap-2 bg-white/10 text-white border border-white/30 hover:bg-white/20 transition-colors duration-200">
+              <Badge key={idx} title={link.title} className="flex gap-2 bg-foreground/10 text-foreground border border-foreground/30 hover:bg-foreground/20 transition-colors duration-200">
                 {link.icon}
                 {link.title}
               </Badge>

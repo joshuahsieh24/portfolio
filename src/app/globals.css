@@ -4,48 +4,50 @@
 
 @layer base {
   :root {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 100%;
-    --card: 0 0% 5%;
-    --card-foreground: 0 0% 100%;
-    --popover: 0 0% 5%;
-    --popover-foreground: 0 0% 100%;
-    --primary: 0 0% 100%;
-    --primary-foreground: 0 0% 0%;
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 0 0% 10%;
-    --muted-foreground: 0 0% 70%;
-    --accent: 0 0% 10%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 0 0% 100%;
+    /* Blue hour — soft dusty navy (light), easy on the eyes, still moody */
+    --background: 216 27% 84%;
+    --foreground: 218 32% 15%;
+    --card: 216 30% 88%;
+    --card-foreground: 218 32% 15%;
+    --popover: 216 30% 88%;
+    --popover-foreground: 218 32% 15%;
+    --primary: 223 45% 46%;
+    --primary-foreground: 216 30% 95%;
+    --secondary: 216 20% 78%;
+    --secondary-foreground: 218 30% 20%;
+    --muted: 216 20% 80%;
+    --muted-foreground: 217 16% 38%;
+    --accent: 216 24% 78%;
+    --accent-foreground: 218 30% 20%;
+    --destructive: 0 55% 48%;
+    --destructive-foreground: 216 30% 95%;
+    --border: 216 18% 74%;
+    --input: 216 18% 74%;
+    --ring: 223 45% 46%;
     --radius: 0.75rem;
   }
 
   .dark {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 100%;
-    --card: 0 0% 5%;
-    --card-foreground: 0 0% 100%;
-    --popover: 0 0% 5%;
-    --popover-foreground: 0 0% 100%;
-    --primary: 0 0% 100%;
-    --primary-foreground: 0 0% 0%;
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 0 0% 10%;
-    --muted-foreground: 0 0% 70%;
-    --accent: 0 0% 10%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 0 0% 100%;
+    /* Blue hour — deep navy night, the moody anchor */
+    --background: 221 30% 10%;
+    --foreground: 214 28% 88%;
+    --card: 221 26% 13%;
+    --card-foreground: 214 28% 88%;
+    --popover: 221 26% 13%;
+    --popover-foreground: 214 28% 88%;
+    --primary: 219 50% 67%;
+    --primary-foreground: 221 30% 11%;
+    --secondary: 221 20% 19%;
+    --secondary-foreground: 214 28% 88%;
+    --muted: 221 20% 19%;
+    --muted-foreground: 216 16% 62%;
+    --accent: 221 20% 21%;
+    --accent-foreground: 214 28% 88%;
+    --destructive: 0 45% 44%;
+    --destructive-foreground: 214 28% 88%;
+    --border: 220 18% 23%;
+    --input: 220 18% 23%;
+    --ring: 219 50% 67%;
   }
 }
 
@@ -58,5 +60,18 @@
     font-weight: 400;
     letter-spacing: -0.01em;
     line-height: 1.6;
+    /* faint grain — keeps the flat color from feeling sterile */
+    background-image: radial-gradient(
+      hsl(var(--foreground) / 0.022) 0.5px,
+      transparent 0.5px
+    );
+    background-size: 4px 4px;
+  }
+  /* editorial serif for display headings */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif), ui-serif, Georgia, serif;
+    letter-spacing: -0.02em;
   }
 }
