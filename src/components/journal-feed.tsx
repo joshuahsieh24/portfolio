@@ -17,13 +17,23 @@ const TABS: { key: Filter; label: string }[] = [
 export function JournalFeed({ posts }: { posts: BlogPost[] }) {
   const [filter, setFilter] = useState<Filter>("all");
 
-  const visible = useMemo(
-    () =>
+  // Writing (essays) first, then scrapbooks; newest within each group.
+  const visible = useMemo(() => {
+    const rank = (p: BlogPost) =>
+      (p.metadata.type ?? "essay") === "essay" ? 0 : 1;
+    const filtered =
       filter === "all"
         ? posts
-        : posts.filter((p) => (p.metadata.type ?? "essay") === filter),
-    [filter, posts]
-  );
+        : posts.filter((p) => (p.metadata.type ?? "essay") === filter);
+    return [...filtered].sort((a, b) => {
+      const r = rank(a) - rank(b);
+      if (r !== 0) return r;
+      return (
+        new Date(b.metadata.publishedAt).getTime() -
+        new Date(a.metadata.publishedAt).getTime()
+      );
+    });
+  }, [filter, posts]);
 
   return (
     <div>
