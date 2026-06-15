@@ -44,7 +44,7 @@ function readContentFiles() {
 }
 
 function normalizeMetadata(data: Record<string, unknown>): PostMetadata {
-  const meta = data as PostMetadata;
+  const meta = data as unknown as PostMetadata;
   return {
     ...meta,
     type: meta.type ?? "essay",
