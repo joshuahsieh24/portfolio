@@ -17,6 +17,8 @@ export default function AnimatedBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const animationRef = useRef<number>();
+  // theme-aware particle color (HSL components read from CSS vars)
+  const colorRef = useRef<string>("24 14% 16%");
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -24,6 +26,12 @@ export default function AnimatedBackground() {
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
+    const readThemeColor = () => {
+      const styles = getComputedStyle(document.documentElement);
+      const fg = styles.getPropertyValue("--foreground").trim();
+      if (fg) colorRef.current = fg;
+    };
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
@@ -33,17 +41,17 @@ export default function AnimatedBackground() {
     const createParticle = (): Particle => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.5,
-      vy: (Math.random() - 0.5) * 0.5,
-      size: Math.random() * 2 + 1,
-      opacity: Math.random() * 0.3 + 0.1,
+      vx: (Math.random() - 0.5) * 0.25,
+      vy: (Math.random() - 0.5) * 0.25,
+      size: Math.random() * 1.6 + 0.8,
+      opacity: Math.random() * 0.18 + 0.05,
       life: 0,
-      maxLife: Math.random() * 300 + 200,
+      maxLife: Math.random() * 400 + 300,
     });
 
     const initParticles = () => {
       particlesRef.current = [];
-      for (let i = 0; i < 40; i++) {
+      for (let i = 0; i < 26; i++) {
         particlesRef.current.push(createParticle());
       }
     };
@@ -60,11 +68,10 @@ export default function AnimatedBackground() {
         if (particle.y < 0) particle.y = canvas.height;
         if (particle.y > canvas.height) particle.y = 0;
 
-        // Fade out over time
+        // Fade over lifetime
         const lifeRatio = particle.life / particle.maxLife;
-        particle.opacity = (1 - lifeRatio) * (Math.random() * 0.3 + 0.1);
+        particle.opacity = (1 - lifeRatio) * (Math.random() * 0.18 + 0.05);
 
-        // Reset particle when it dies
         if (particle.life >= particle.maxLife) {
           particlesRef.current[index] = createParticle();
         }
@@ -73,27 +80,28 @@ export default function AnimatedBackground() {
 
     const drawParticles = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
+      const color = colorRef.current;
+
       particlesRef.current.forEach((particle) => {
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
+        ctx.fillStyle = `hsl(${color} / ${particle.opacity})`;
         ctx.fill();
       });
 
-      // Draw subtle connections between nearby particles
+      // Subtle connections between nearby particles
       particlesRef.current.forEach((particle, i) => {
         particlesRef.current.slice(i + 1).forEach((otherParticle) => {
           const dx = particle.x - otherParticle.x;
           const dy = particle.y - otherParticle.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 120) {
-            const opacity = (1 - distance / 120) * 0.1;
+          if (distance < 130) {
+            const opacity = (1 - distance / 130) * 0.06;
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(otherParticle.x, otherParticle.y);
-            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+            ctx.strokeStyle = `hsl(${color} / ${opacity})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -107,6 +115,7 @@ export default function AnimatedBackground() {
       animationRef.current = requestAnimationFrame(animate);
     };
 
+    readThemeColor();
     resizeCanvas();
     initParticles();
     animate();
@@ -116,6 +125,13 @@ export default function AnimatedBackground() {
       initParticles();
     };
 
+    // re-read color when the theme toggles (class changes on <html>)
+    const observer = new MutationObserver(readThemeColor);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
     window.addEventListener("resize", handleResize);
 
     return () => {
@@ -123,6 +139,7 @@ export default function AnimatedBackground() {
         cancelAnimationFrame(animationRef.current);
       }
       window.removeEventListener("resize", handleResize);
+      observer.disconnect();
     };
   }, []);
 

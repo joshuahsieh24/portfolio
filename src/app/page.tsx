@@ -150,30 +150,30 @@ export default function Page() {
         <div className="max-w-4xl mx-auto text-center">
           <BlurFade delay={BLUR_FADE_DELAY}>
             <div className="space-y-6">
-              <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-tight">
+              <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-foreground leading-tight">
                 Hi, I'm{" "}
-                <span className="bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-foreground via-foreground to-primary bg-clip-text text-transparent">
                   {DATA.name}
                 </span>
               </h1>
-              <p className="text-xl lg:text-2xl text-gray-300 leading-relaxed max-w-2xl mx-auto">
+              <p className="text-xl lg:text-2xl text-foreground/80 leading-relaxed max-w-2xl mx-auto">
                 I build software that's{" "}
-                <span className="text-white font-medium">well-engineered</span>,{" "}
-                <span className="text-white font-medium">product-aware</span>, and{" "}
-                <span className="text-white font-medium">worth using</span>.
+                <span className="text-foreground font-medium">well-engineered</span>,{" "}
+                <span className="text-foreground font-medium">product-aware</span>, and{" "}
+                <span className="text-foreground font-medium">worth using</span>.
               </p>
-              <div className="flex items-center justify-center gap-2.5 text-sm text-gray-500">
+              <div className="flex items-center justify-center gap-2.5 text-sm text-muted-foreground">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-400/80 animate-pulse shrink-0" />
                 <span>
-                  Currently building{" "}
-                  <span className="text-gray-400">Bluehour</span>
+                  Check out{" "}
+                  <span className="text-muted-foreground">Bluehour</span>
                   {" "}— a calm ambient focus app designed to live on a second monitor.
                 </span>
               </div>
               <div className="pt-2">
                 <button
                   onClick={() => smoothScrollTo("projects")}
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-black text-white rounded-xl font-medium hover:bg-gray-900 transition-all duration-300 hover:scale-105 border border-white/20"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-foreground text-background rounded-xl font-medium hover:bg-foreground/90 transition-all duration-300 hover:scale-105 border border-foreground/20"
                 >
                   See my work
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -188,14 +188,14 @@ export default function Page() {
 
       {/* ── Featured Work ─────────────────────────────────────────── */}
       {/* No section header — Bluehour is self-evident */}
-      <section id="projects" className="py-14 px-6 relative z-10 border-t border-white/[0.04]">
+      <section id="projects" className="py-14 px-6 relative z-10 border-t border-foreground/[0.04]">
         <div className="max-w-6xl mx-auto">
 
           {/* Bluehour — Centerpiece */}
           <BlurFade delay={BLUR_FADE_DELAY * 3}>
             <div className="group relative mb-8">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-indigo-900/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm" />
-              <div className="relative bg-white/5 backdrop-blur-md border border-white/[0.1] rounded-3xl overflow-hidden shadow-2xl transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm" />
+              <div className="relative bg-foreground/5 backdrop-blur-md border border-foreground/[0.1] rounded-3xl overflow-hidden shadow-2xl transition-all duration-300">
                 <div className="w-full h-64 md:h-80 overflow-hidden">
                   <img
                     src="/bluehour.png"
@@ -206,18 +206,18 @@ export default function Page() {
                 <div className="p-8 lg:p-12 grid grid-cols-1 lg:grid-cols-2 gap-10">
                   <div className="space-y-5">
                     <div>
-                      <span className="text-[10px] font-semibold tracking-widest text-gray-500 uppercase">Featured Project</span>
-                      <h3 className="text-3xl font-bold text-white mt-2 mb-3">Bluehour</h3>
-                      <p className="text-gray-300 leading-relaxed text-sm">
+                      <span className="text-[10px] font-semibold tracking-widest text-muted-foreground uppercase">Featured Project</span>
+                      <h3 className="text-3xl font-bold text-foreground mt-2 mb-3">Bluehour</h3>
+                      <p className="text-foreground/80 leading-relaxed text-sm">
                         Fullscreen ambient focus app for a second monitor — six live scenes with canvas-rendered particle effects, optional looping audio, and a minimal timer with session history.
                       </p>
-                      <p className="mt-3 text-xs text-gray-600 italic">
+                      <p className="mt-3 text-xs text-muted-foreground/70 italic">
                         Second-monitor focus · Fast scene loading · No account needed
                       </p>
                     </div>
                     <div className="flex flex-wrap gap-1.5">
                       {bluehour.technologies.map((tech) => (
-                        <Badge key={tech} variant="outline" className="text-gray-400 border-white/[0.1] bg-white/[0.03] text-xs">
+                        <Badge key={tech} variant="outline" className="text-muted-foreground border-foreground/[0.1] bg-foreground/[0.03] text-xs">
                           {tech}
                         </Badge>
                       ))}
@@ -227,7 +227,7 @@ export default function Page() {
                         href="https://bluehourfocus.vercel.app/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-black rounded-xl text-sm font-semibold hover:bg-gray-100 transition-colors duration-200"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-foreground text-background rounded-xl text-sm font-semibold hover:bg-foreground/90 transition-colors duration-200"
                       >
                         Visit Site
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -238,7 +238,7 @@ export default function Page() {
                         href="https://github.com/joshuahsieh24/bluehour"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-5 py-2.5 border border-white/[0.15] text-gray-300 rounded-xl text-sm font-semibold hover:bg-white/[0.06] transition-colors duration-200"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 border border-foreground/[0.15] text-foreground/80 rounded-xl text-sm font-semibold hover:bg-foreground/[0.06] transition-colors duration-200"
                       >
                         Source
                       </Link>
@@ -252,8 +252,8 @@ export default function Page() {
                       { label: "What I Optimized For", body: "Sub-second load, no friction on first open, and a visual quality that doesn't feel like a weekend project. The look is part of how it works." },
                     ].map((item) => (
                       <div key={item.label}>
-                        <h4 className="text-[10px] font-semibold tracking-widest text-gray-500 uppercase mb-1.5">{item.label}</h4>
-                        <p className="text-gray-400 text-sm leading-relaxed">{item.body}</p>
+                        <h4 className="text-[10px] font-semibold tracking-widest text-muted-foreground uppercase mb-1.5">{item.label}</h4>
+                        <p className="text-muted-foreground text-sm leading-relaxed">{item.body}</p>
                       </div>
                     ))}
                   </div>
@@ -288,7 +288,7 @@ export default function Page() {
           {/* Additional projects — compact list */}
           {additionalProjects.length > 0 && (
             <BlurFade delay={BLUR_FADE_DELAY * 8}>
-              <div className="mt-6 pt-5 border-t border-white/[0.04] divide-y divide-white/[0.04]">
+              <div className="mt-6 pt-5 border-t border-foreground/[0.04] divide-y divide-white/[0.04]">
                 {additionalProjects.map((project) => (
                   <div
                     key={project.title}
@@ -300,19 +300,19 @@ export default function Page() {
                           href={project.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-sm text-gray-500 hover:text-gray-300 transition-colors"
+                          className="text-sm text-muted-foreground hover:text-foreground/80 transition-colors"
                         >
                           {project.title}
                         </Link>
                       ) : (
-                        <span className="text-sm text-gray-500">{project.title}</span>
+                        <span className="text-sm text-muted-foreground">{project.title}</span>
                       )}
-                      <span className="text-gray-700 text-xs shrink-0">·</span>
-                      <span className="text-xs text-gray-600 leading-relaxed">
+                      <span className="text-muted-foreground/50 text-xs shrink-0">·</span>
+                      <span className="text-xs text-muted-foreground/70 leading-relaxed">
                         {project.description.split(".")[0]}.
                       </span>
                     </div>
-                    <span className="text-xs text-gray-700 shrink-0 sm:ml-4">{project.dates}</span>
+                    <span className="text-xs text-muted-foreground/50 shrink-0 sm:ml-4">{project.dates}</span>
                   </div>
                 ))}
               </div>
@@ -322,10 +322,10 @@ export default function Page() {
       </section>
 
       {/* ── Experience ────────────────────────────────────────────── */}
-      <section id="work" className="py-14 px-6 relative z-10 border-t border-white/[0.04]">
+      <section id="work" className="py-14 px-6 relative z-10 border-t border-foreground/[0.04]">
         <div className="max-w-5xl mx-auto">
           <BlurFade delay={BLUR_FADE_DELAY * 7}>
-            <h2 className="text-2xl font-bold tracking-tight text-white mb-10">Experience</h2>
+            <h2 className="text-2xl font-bold tracking-tight text-foreground mb-10">Experience</h2>
           </BlurFade>
 
           {/* Primary roles — row-separated, no card boxes */}
@@ -359,11 +359,11 @@ export default function Page() {
                     {work.logoUrl && (
                       <img src={work.logoUrl} alt={work.company} className="w-4 h-4 rounded-full object-cover opacity-40 shrink-0" />
                     )}
-                    <span className="text-sm text-gray-500">{work.company}</span>
-                    <span className="text-gray-700 text-xs shrink-0">·</span>
-                    <span className="text-sm text-gray-600">{work.title}</span>
+                    <span className="text-sm text-muted-foreground">{work.company}</span>
+                    <span className="text-muted-foreground/50 text-xs shrink-0">·</span>
+                    <span className="text-sm text-muted-foreground/70">{work.title}</span>
                   </div>
-                  <span className="text-xs text-gray-700 shrink-0 sm:ml-4">{work.start} – {work.end ?? "Present"}</span>
+                  <span className="text-xs text-muted-foreground/50 shrink-0 sm:ml-4">{work.start} – {work.end ?? "Present"}</span>
                 </div>
               ))}
             </div>
@@ -373,27 +373,27 @@ export default function Page() {
 
       {/* ── How I Think ───────────────────────────────────────────── */}
       {/* Borderless typographic manifesto — no card boxes */}
-      <section id="thinking" className="py-14 px-6 relative z-10 border-t border-white/[0.04]">
+      <section id="thinking" className="py-14 px-6 relative z-10 border-t border-foreground/[0.04]">
         <div className="max-w-5xl mx-auto">
           <BlurFade delay={BLUR_FADE_DELAY * 11}>
-            <h2 className="text-2xl font-bold tracking-tight text-white mb-10">How I Think</h2>
+            <h2 className="text-2xl font-bold tracking-tight text-foreground mb-10">How I Think</h2>
           </BlurFade>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8">
             {PRINCIPLES.slice(0, 4).map((p, id) => (
               <BlurFade key={p.n} delay={BLUR_FADE_DELAY * 12 + id * 0.06}>
                 <div>
-                  <span className="text-[10px] font-semibold tracking-widest text-gray-600 uppercase">{p.n}</span>
-                  <h3 className="text-sm font-semibold text-white mt-2 mb-1.5 leading-snug">{p.title}</h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">{p.body}</p>
+                  <span className="text-[10px] font-semibold tracking-widest text-muted-foreground/70 uppercase">{p.n}</span>
+                  <h3 className="text-sm font-semibold text-foreground mt-2 mb-1.5 leading-snug">{p.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{p.body}</p>
                 </div>
               </BlurFade>
             ))}
             {/* 5th principle spans full width — capstone */}
             <BlurFade delay={BLUR_FADE_DELAY * 16} >
-              <div className="md:col-span-2 pt-2 border-t border-white/[0.04]">
-                <span className="text-[10px] font-semibold tracking-widest text-gray-600 uppercase">{PRINCIPLES[4].n}</span>
-                <h3 className="text-sm font-semibold text-white mt-2 mb-1.5 leading-snug">{PRINCIPLES[4].title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed max-w-2xl">{PRINCIPLES[4].body}</p>
+              <div className="md:col-span-2 pt-2 border-t border-foreground/[0.04]">
+                <span className="text-[10px] font-semibold tracking-widest text-muted-foreground/70 uppercase">{PRINCIPLES[4].n}</span>
+                <h3 className="text-sm font-semibold text-foreground mt-2 mb-1.5 leading-snug">{PRINCIPLES[4].title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl">{PRINCIPLES[4].body}</p>
               </div>
             </BlurFade>
           </div>
@@ -401,7 +401,7 @@ export default function Page() {
       </section>
 
       {/* ── Outside the screen — quiet ambient pause ──────────────── */}
-      <section className="py-10 px-6 relative z-10 border-t border-white/[0.04]">
+      <section className="py-10 px-6 relative z-10 border-t border-foreground/[0.04]">
         <div className="max-w-5xl mx-auto">
           <BlurFade delay={BLUR_FADE_DELAY * 17}>
             <div className="grid grid-cols-3 gap-3 mb-6">
@@ -416,7 +416,7 @@ export default function Page() {
               ))}
             </div>
             {/* One ambient line — no labeled blocks */}
-            <p className="text-xs text-gray-600">
+            <p className="text-xs text-muted-foreground/70">
               badminton, cooking, hiking, 210 wpm &nbsp;—&nbsp; nature, basketball, movies
             </p>
           </BlurFade>
@@ -425,14 +425,14 @@ export default function Page() {
 
       {/* ── Stack ─────────────────────────────────────────────────── */}
       {/* No h2 — eyebrow is enough, content is self-explanatory */}
-      <section id="skills" className="py-14 px-6 relative z-10 border-t border-white/[0.04]">
+      <section id="skills" className="py-14 px-6 relative z-10 border-t border-foreground/[0.04]">
         <div className="max-w-5xl mx-auto">
           <BlurFade delay={BLUR_FADE_DELAY * 18}>
-            <span className="text-[11px] font-semibold tracking-widest text-gray-500 uppercase block mb-8">Stack</span>
+            <span className="text-[11px] font-semibold tracking-widest text-muted-foreground uppercase block mb-8">Stack</span>
             <div className="space-y-4">
               {SKILL_GROUPS.map((group) => (
                 <div key={group.label} className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
-                  <span className="text-[10px] font-semibold tracking-widest text-gray-600 uppercase w-28 shrink-0">
+                  <span className="text-[10px] font-semibold tracking-widest text-muted-foreground/70 uppercase w-28 shrink-0">
                     {group.label}
                   </span>
                   <div className="flex flex-wrap gap-1.5">
@@ -440,7 +440,7 @@ export default function Page() {
                       <Badge
                         key={skill}
                         variant="outline"
-                        className="text-gray-400 border-white/[0.1] bg-white/[0.03] px-3 py-1 text-xs font-medium hover:bg-white/[0.07] hover:text-white transition-colors duration-200"
+                        className="text-muted-foreground border-foreground/[0.1] bg-foreground/[0.03] px-3 py-1 text-xs font-medium hover:bg-foreground/[0.07] hover:text-foreground transition-colors duration-200"
                       >
                         {skill}
                       </Badge>
@@ -454,12 +454,12 @@ export default function Page() {
       </section>
 
       {/* ── Contact ───────────────────────────────────────────────── */}
-      <section id="contact" className="py-14 px-6 relative z-10 border-t border-white/[0.04]">
+      <section id="contact" className="py-14 px-6 relative z-10 border-t border-foreground/[0.04]">
         <div className="max-w-5xl mx-auto text-center">
           <BlurFade delay={BLUR_FADE_DELAY * 19}>
             <div className="space-y-6">
-              <h2 className="text-3xl font-bold tracking-tight text-white">Let's Talk</h2>
-              <p className="text-sm text-gray-500 max-w-md mx-auto leading-relaxed">
+              <h2 className="text-3xl font-bold tracking-tight text-foreground">Let's Talk</h2>
+              <p className="text-sm text-muted-foreground max-w-md mx-auto leading-relaxed">
                 Looking for my next role — somewhere engineering quality, product thinking, and design all show up in the same room.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center items-center pt-1">
@@ -467,7 +467,7 @@ export default function Page() {
                   href={DATA.contact.social.LinkedIn.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white text-black rounded-xl text-sm font-semibold hover:bg-gray-100 transition-colors duration-200 min-w-[160px]"
+                  className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-foreground text-background rounded-xl text-sm font-semibold hover:bg-foreground/90 transition-colors duration-200 min-w-[160px]"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -476,7 +476,7 @@ export default function Page() {
                 </Link>
                 <Link
                   href={`mailto:${DATA.contact.email}`}
-                  className="inline-flex items-center gap-2.5 px-7 py-3.5 border border-white/[0.15] text-gray-300 rounded-xl text-sm font-semibold hover:bg-white hover:text-black transition-all duration-200 min-w-[160px]"
+                  className="inline-flex items-center gap-2.5 px-7 py-3.5 border border-border text-muted-foreground rounded-xl text-sm font-semibold hover:bg-foreground hover:text-background transition-all duration-200 min-w-[160px]"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -490,9 +490,9 @@ export default function Page() {
       </section>
 
       {/* ── Footer ────────────────────────────────────────────────── */}
-      <footer className="py-8 px-6 border-t border-white/[0.04]">
+      <footer className="py-8 px-6 border-t border-foreground/[0.04]">
         <div className="max-w-5xl mx-auto flex flex-col items-center gap-5">
-          <p className="text-xs text-gray-700 italic">
+          <p className="text-xs text-muted-foreground/50 italic">
             Good software gets out of the way.
           </p>
           <div className="flex flex-wrap justify-center gap-6">
@@ -500,7 +500,7 @@ export default function Page() {
               { label: "Email", href: `mailto:${DATA.contact.email}` },
 { label: "LinkedIn", href: DATA.contact.social.LinkedIn.url, external: true },
               { label: "GitHub", href: DATA.contact.social.GitHub.url, external: true },
-              { label: "Blog", href: "https://dev.to/josh_hsiehh", external: true },
+              { label: "Journal", href: "/blog" },
               { label: "YouTube", href: "https://www.youtube.com/@Joshua-wg5lt", external: true },
             ].map((link) => (
               <Link
@@ -508,7 +508,7 @@ export default function Page() {
                 href={link.href}
                 target={link.external ? "_blank" : undefined}
                 rel={link.external ? "noopener noreferrer" : undefined}
-                className="text-xs text-gray-600 hover:text-white transition-colors duration-200"
+                className="text-xs text-muted-foreground/70 hover:text-foreground transition-colors duration-200"
               >
                 {link.label}
               </Link>

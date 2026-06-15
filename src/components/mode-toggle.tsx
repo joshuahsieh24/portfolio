@@ -14,11 +14,12 @@ export const ModeToggle = forwardRef<HTMLButtonElement>((props, ref) => {
       variant="ghost"
       type="button"
       size="icon"
-      className="px-2 hover:bg-skyteal/20 hover:text-skyteal transition-colors duration-200"
+      className="size-8 px-0 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors duration-200"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      aria-label="Toggle theme"
     >
-      <SunIcon className="h-[1.2rem] w-[1.2rem] text-muted-foreground dark:hidden" />
-      <MoonIcon className="hidden h-[1.2rem] w-[1.2rem] text-muted-foreground dark:block" />
+      <SunIcon className="h-[1.1rem] w-[1.1rem] dark:hidden" />
+      <MoonIcon className="hidden h-[1.1rem] w-[1.1rem] dark:block" />
     </Button>
   );
 });

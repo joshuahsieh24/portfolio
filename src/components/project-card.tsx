@@ -56,7 +56,7 @@ export function ProjectCard({
   return (
     <div
       className={cn(
-        "flex flex-col h-full overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-sm transition-all duration-300",
+        "flex flex-col h-full overflow-hidden rounded-2xl border border-foreground/[0.08] bg-foreground/[0.03] backdrop-blur-sm transition-all duration-300",
         className
       )}
     >
@@ -79,7 +79,7 @@ export function ProjectCard({
             className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
           />
           {/* Subtle fade from image into card body */}
-          <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-black/40 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-background/60 to-transparent" />
         </div>
       )}
 
@@ -94,24 +94,24 @@ export function ProjectCard({
               rel="noopener noreferrer"
               className="block group/title"
             >
-              <h3 className="text-sm font-semibold text-white group-hover/title:text-gray-200 transition-colors leading-snug">
+              <h3 className="text-sm font-semibold text-foreground group-hover/title:text-primary transition-colors leading-snug">
                 {title}
               </h3>
             </Link>
           ) : (
-            <h3 className="text-sm font-semibold text-white leading-snug">{title}</h3>
+            <h3 className="text-sm font-semibold text-foreground leading-snug">{title}</h3>
           )}
-          <time className="text-[11px] text-gray-600 mt-0.5 block">{dates}</time>
+          <time className="text-[11px] text-muted-foreground/70 mt-0.5 block">{dates}</time>
         </div>
 
         {/* Description */}
-        <Markdown className="prose max-w-full font-sans text-xs text-gray-400 dark:prose-invert prose-headings:text-white prose-a:text-white leading-relaxed">
+        <Markdown className="prose max-w-full font-sans text-xs text-muted-foreground dark:prose-invert prose-headings:text-foreground prose-a:text-foreground leading-relaxed">
           {description}
         </Markdown>
 
         {/* Impact — always visible, subtle */}
         {impact && (
-          <p className="text-[11px] text-gray-600 italic leading-relaxed">{impact}</p>
+          <p className="text-[11px] text-muted-foreground/70 italic leading-relaxed">{impact}</p>
         )}
 
         {/* Tags */}
@@ -120,7 +120,7 @@ export function ProjectCard({
             {tags.map((tag) => (
               <Badge
                 key={tag}
-                className="px-2 py-0.5 text-[10px] font-medium bg-white/[0.05] text-gray-400 border border-white/[0.1] hover:bg-white/[0.08] transition-colors rounded-md"
+                className="px-2 py-0.5 text-[10px] font-medium bg-foreground/[0.05] text-muted-foreground border border-foreground/[0.1] hover:bg-foreground/[0.08] transition-colors rounded-md"
                 variant="secondary"
               >
                 {tag}
@@ -139,7 +139,7 @@ export function ProjectCard({
                 target={link.target || "_blank"}
                 rel={link.rel || "noopener noreferrer"}
               >
-                <Badge className="flex gap-1.5 px-2 py-1 text-[10px] font-medium bg-white/[0.05] text-gray-400 border border-white/[0.1] hover:bg-white/[0.08] transition-colors rounded-md">
+                <Badge className="flex gap-1.5 px-2 py-1 text-[10px] font-medium bg-foreground/[0.05] text-muted-foreground border border-foreground/[0.1] hover:bg-foreground/[0.08] transition-colors rounded-md">
                   {link.icon}
                   {link.type}
                 </Badge>
@@ -150,10 +150,10 @@ export function ProjectCard({
 
         {/* ── Expandable depth — consistent across all cards ── */}
         {depth && (
-          <div className="border-t border-white/[0.06] pt-3 mt-1">
+          <div className="border-t border-foreground/[0.06] pt-3 mt-1">
             <button
               onClick={() => setExpanded(!expanded)}
-              className="flex items-center gap-1.5 text-[11px] text-gray-600 hover:text-gray-300 transition-colors duration-200 select-none"
+              className="flex items-center gap-1.5 text-[11px] text-muted-foreground/70 hover:text-foreground transition-colors duration-200 select-none"
             >
               <svg
                 className={cn(
@@ -173,10 +173,10 @@ export function ProjectCard({
               <div className="mt-4 space-y-4">
                 {depth.sections.map((section) => (
                   <div key={section.title}>
-                    <h5 className="text-[10px] font-semibold tracking-widest text-gray-500 uppercase mb-1.5">
+                    <h5 className="text-[10px] font-semibold tracking-widest text-muted-foreground uppercase mb-1.5">
                       {section.title}
                     </h5>
-                    <p className="text-[11px] text-gray-400 leading-relaxed">{section.body}</p>
+                    <p className="text-[11px] text-muted-foreground leading-relaxed">{section.body}</p>
                   </div>
                 ))}
               </div>
