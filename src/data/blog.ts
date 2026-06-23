@@ -24,6 +24,8 @@ export interface PostMetadata {
   type?: PostType;
   /** image used on the index card (falls back to first gallery image) */
   cover?: string;
+  /** caption shown under the closing photo on an essay */
+  coverCaption?: string;
   /** photo-dump / scrapbook images */
   images?: GalleryImage[];
 }
@@ -34,10 +36,20 @@ export interface BlogPost {
 }
 
 export interface FullPost extends BlogPost {
+  /** the main, polished article body */
   html: string;
+  /** the original, unfiltered reflection — shown in a collapsible section */
+  rawHtml?: string;
 }
 
 const CONTENT_DIR = path.join(process.cwd(), "content");
+
+/**
+ * Marker that splits a post body into the polished article (everything
+ * before it) and the original reflection (everything after). Posts without
+ * the marker render exactly as before.
+ */
+const RAW_JOURNAL_MARKER = "<!-- raw-journal -->";
 
 function readContentFiles() {
   return fs.readdirSync(CONTENT_DIR).filter((file) => /\.mdx?$/.test(file));
@@ -91,6 +103,10 @@ export async function getPost(slug: string): Promise<FullPost | null> {
 
   const raw = fs.readFileSync(file, "utf-8");
   const { data, content } = matter(raw);
-  const html = content.trim() ? await markdownToHtml(content) : "";
-  return { slug, metadata: normalizeMetadata(data), html };
+
+  const [articleMd, rawMd = ""] = content.split(RAW_JOURNAL_MARKER);
+  const html = articleMd.trim() ? await markdownToHtml(articleMd) : "";
+  const rawHtml = rawMd.trim() ? await markdownToHtml(rawMd) : undefined;
+
+  return { slug, metadata: normalizeMetadata(data), html, rawHtml };
 }

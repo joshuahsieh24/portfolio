@@ -2,6 +2,7 @@ import { getBlogPosts, getPost } from "@/data/blog";
 import { formatDate } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 import BlurFade from "@/components/magicui/blur-fade";
+import { RawJournal } from "@/components/raw-journal";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -77,16 +78,44 @@ export default async function PostPage({
         </header>
       </BlurFade>
 
-      {/* Optional written intro / body (works for both types) */}
+      {/* Original reflection — collapsed by default; the article stays the focus */}
+      {!isScrapbook && post.rawHtml && (
+        <BlurFade delay={BLUR_FADE_DELAY * 2.5}>
+          <RawJournal html={post.rawHtml} date={post.metadata.publishedAt} />
+        </BlurFade>
+      )}
+
+      {/* Main article — the polished, showcased body */}
       {post.html && (
         <BlurFade delay={BLUR_FADE_DELAY * 3}>
           <div
             className={cn(
-              "prose prose-neutral dark:prose-invert prose-headings:font-serif prose-headings:tracking-tight prose-a:text-primary prose-pre:rounded-xl prose-pre:border prose-pre:border-border",
+              "prose prose-neutral dark:prose-invert prose-headings:font-serif prose-headings:tracking-tight prose-h2:mt-10 prose-a:text-primary prose-pre:rounded-xl prose-pre:border prose-pre:border-border",
               isScrapbook ? "max-w-2xl mb-10" : "max-w-2xl"
             )}
             dangerouslySetInnerHTML={{ __html: post.html }}
           />
+        </BlurFade>
+      )}
+
+      {/* Closing photo — the emotional payoff to the "kid in me" line */}
+      {!isScrapbook && post.metadata.cover && (
+        <BlurFade delay={BLUR_FADE_DELAY * 4}>
+          <figure className="mt-12 max-w-2xl">
+            <div className="overflow-hidden rounded-2xl border border-border">
+              <img
+                src={post.metadata.cover}
+                alt={post.metadata.coverCaption ?? post.metadata.title}
+                loading="lazy"
+                className="block w-full h-auto object-cover"
+              />
+            </div>
+            {post.metadata.coverCaption && (
+              <figcaption className="mt-3 text-xs text-muted-foreground/80 leading-relaxed">
+                {post.metadata.coverCaption}
+              </figcaption>
+            )}
+          </figure>
         </BlurFade>
       )}
 
